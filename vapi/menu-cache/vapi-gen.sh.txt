@@ -1,0 +1,15 @@
+#!/bin/sh
+
+
+ls /usr/lib/pkgconfig/ |grep menu-cache
+grep Cflags /usr/lib/pkgconfig/libmenu-cache.pc
+ls /usr/lib/libmenu-cache*.so
+grep 'typedef struct' /usr/include/menu-cache/menu-cache.h
+echo
+echo
+echo "include/menu-cache/" > libmenu-cache.files
+echo "lib/libmenu-cache.so" >> libmenu-cache.files
+echo "Menu" > libmenu-cache.namespace
+vala-gen-introspect libmenu-cache .
+vapigen --library libmenu-cache libmenu-cache.gi
+

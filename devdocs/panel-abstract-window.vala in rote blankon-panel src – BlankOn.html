@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+
+  <head>
+    <title>
+      panel-abstract-window.vala in rote/blankon-panel/src
+     – BlankOn
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/export/rote%2Cblankon-panel%2C47/rote/blankon-panel/src/panel-abstract-window.vala" type="text/plain" title="Original Format" />
+        <link rel="up" href="/browser/rote/blankon-panel/src/panel-abstract-window.vala" />
+        <link rel="next" href="/browser/rote/blankon-panel/src/panel-abstract-window.vala?rev=rote%2Cblankon-panel%2C23" title="Revision rote,blankon-panel,23" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/code.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/browser.css" type="text/css" />
+        <link rel="prev" href="/browser/rote/blankon-panel/src/panel-abstract-window.vala?rev=rote%2Cblankon-panel%2C6" title="Revision rote,blankon-panel,6" />
+        <link rel="shortcut icon" href="/chrome/site/blankon.ico" type="image/x-icon" />
+        <link rel="icon" href="/chrome/site/blankon.ico" type="image/x-icon" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search BlankOn" />
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/chrome/common/js/folding.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $(".trac-toggledeleted").show().click(function() {
+                  $(this).siblings().find(".trac-deleted").toggle();
+                  return false;
+        }).click();
+        $("#jumploc input").hide();
+        $("#jumploc select").change(function () {
+          this.parentNode.parentNode.submit();
+        });
+          $('#preview table.code').enableCollapsibleColumns($('#preview table.code thead th.content'));
+      });
+    </script>
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://dev.blankonlinux.or.id/"><img src="/chrome/site/blankon.png" alt="" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/about">About Trac</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/openidlogin">Login</a></li><li class="last"><a href="/wiki/TracGuide">Help/Guide</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/browser">Browse Source</a></li><li><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span>&larr; <a class="prev" href="/browser/rote/blankon-panel/src/panel-abstract-window.vala?rev=rote%2Cblankon-panel%2C6" title="Revision rote,blankon-panel,6">Previous Revision</a></span></li><li><a href="/browser/rote/blankon-panel/src/panel-abstract-window.vala">Latest Revision</a></li><li><span><a class="next" href="/browser/rote/blankon-panel/src/panel-abstract-window.vala?rev=rote%2Cblankon-panel%2C23" title="Revision rote,blankon-panel,23">Next Revision</a> &rarr;</span></li><li><a href="/browser/rote/blankon-panel/src/panel-abstract-window.vala?annotate=blame&amp;rev=rote%2Cblankon-panel%2C47" title="Annotate each line with the last changed revision (this can be time consuming...)">Annotate</a></li><li class="last"><a href="/log/rote/blankon-panel/src/panel-abstract-window.vala?rev=rote%2Cblankon-panel%2C47">Revision Log</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="browser">
+          <h1>
+<a class="pathentry first" href="/browser?order=name" title="Go to repository root">source:</a>
+<a class="pathentry" href="/browser/rote?rev=rote%2Cblankon-panel%2C47&amp;order=name" title="View rote">rote</a><span class="pathentry sep">/</span><a class="pathentry" href="/browser/rote/blankon-panel?rev=rote%2Cblankon-panel%2C47&amp;order=name" title="View blankon-panel">blankon-panel</a><span class="pathentry sep">/</span><a class="pathentry" href="/browser/rote/blankon-panel/src?rev=rote%2Cblankon-panel%2C47&amp;order=name" title="View src">src</a><span class="pathentry sep">/</span><a class="pathentry" href="/browser/rote/blankon-panel/src/panel-abstract-window.vala?rev=rote%2Cblankon-panel%2C47&amp;order=name" title="View panel-abstract-window.vala">panel-abstract-window.vala</a>
+<span class="pathentry sep">@</span>
+  <a class="pathentry" href="/changeset/rote%2Cblankon-panel%2C22" title="View changeset rote,blankon-panel,22">rote,blankon-panel,22</a>
+<br style="clear: both" />
+</h1>
+        <div id="jumprev">
+          <form action="" method="get">
+            <div>
+              <label for="rev" title="Hint: clear the field to view latest revision">
+                View revision:</label>
+              <input type="text" id="rev" name="rev" value="rote,blankon-panel,47" size="6" />
+            </div>
+          </form>
+        </div>
+      <table id="info" summary="Revision info">
+        <tr>
+          <th scope="col">Revision <a href="/changeset/rote%2Cblankon-panel%2C22">rote,blankon-panel,22</a>,
+            <span title="2853 bytes">2.8 KB</span>
+            checked in by Aji Kisworo Mukti &lt;adzy@…&gt;, <span title="07/28/2011 06:38:03 PM">6 months</span> ago
+            (<a href="/changeset/rote%2Cblankon-panel%2C22/rote/blankon-panel/src/panel-abstract-window.vala">diff</a>)</th>
+        </tr>
+        <tr>
+          <td class="message searchable">
+              <p>
+0.2.11<br />
+</p>
+          </td>
+        </tr>
+      </table>
+      <div id="preview" class="searchable">
+        
+  <table class="code"><thead><tr><th class="lineno" title="Line numbers">Line</th><th class="content"> </th></tr></thead><tbody><tr><th id="L1"><a href="#L1">1</a></th><td>using Gtk;</td></tr><tr><th id="L2"><a href="#L2">2</a></th><td>using Gdk;</td></tr><tr><th id="L3"><a href="#L3">3</a></th><td></td></tr><tr><th id="L4"><a href="#L4">4</a></th><td>public class PanelAbstractWindow : Gtk.Window {</td></tr><tr><th id="L5"><a href="#L5">5</a></th><td>    public signal void screen_size_changed ();</td></tr><tr><th id="L6"><a href="#L6">6</a></th><td></td></tr><tr><th id="L7"><a href="#L7">7</a></th><td>    protected void set_struts () {</td></tr><tr><th id="L8"><a href="#L8">8</a></th><td>        ulong[] struts = new ulong[12];</td></tr><tr><th id="L9"><a href="#L9">9</a></th><td></td></tr><tr><th id="L10"><a href="#L10">10</a></th><td>        var r = PanelScreen.get_primary_monitor_geometry (); </td></tr><tr><th id="L11"><a href="#L11">11</a></th><td></td></tr><tr><th id="L12"><a href="#L12">12</a></th><td>        var left = 0;</td></tr><tr><th id="L13"><a href="#L13">13</a></th><td>        var right = 0;</td></tr><tr><th id="L14"><a href="#L14">14</a></th><td>        var top = 0;</td></tr><tr><th id="L15"><a href="#L15">15</a></th><td>        var bottom = 0;</td></tr><tr><th id="L16"><a href="#L16">16</a></th><td>        var left_y0 = 0;</td></tr><tr><th id="L17"><a href="#L17">17</a></th><td>        var left_y1 = 0;</td></tr><tr><th id="L18"><a href="#L18">18</a></th><td>        var right_y0 = 0;</td></tr><tr><th id="L19"><a href="#L19">19</a></th><td>        var right_y1 = 0;</td></tr><tr><th id="L20"><a href="#L20">20</a></th><td>        var top_x0 = 0;</td></tr><tr><th id="L21"><a href="#L21">21</a></th><td>        var top_x1 = 0;</td></tr><tr><th id="L22"><a href="#L22">22</a></th><td>        var bottom_x0 = 0;</td></tr><tr><th id="L23"><a href="#L23">23</a></th><td>        var bottom_x1 = 0;</td></tr><tr><th id="L24"><a href="#L24">24</a></th><td></td></tr><tr><th id="L25"><a href="#L25">25</a></th><td>        var x = 0;</td></tr><tr><th id="L26"><a href="#L26">26</a></th><td>        var y = 0;</td></tr><tr><th id="L27"><a href="#L27">27</a></th><td></td></tr><tr><th id="L28"><a href="#L28">28</a></th><td>        get_window().get_position(out x, out y);</td></tr><tr><th id="L29"><a href="#L29">29</a></th><td>        var width = get_window().get_width ();</td></tr><tr><th id="L30"><a href="#L30">30</a></th><td>        var height = get_window().get_height ();</td></tr><tr><th id="L31"><a href="#L31">31</a></th><td></td></tr><tr><th id="L32"><a href="#L32">32</a></th><td>        if (width != r.width) {</td></tr><tr><th id="L33"><a href="#L33">33</a></th><td>            if (x &lt; r.width / 2) {</td></tr><tr><th id="L34"><a href="#L34">34</a></th><td>                left = width;</td></tr><tr><th id="L35"><a href="#L35">35</a></th><td>                left_y0 = y;</td></tr><tr><th id="L36"><a href="#L36">36</a></th><td>                left_y1 = y + height;</td></tr><tr><th id="L37"><a href="#L37">37</a></th><td>            } else {</td></tr><tr><th id="L38"><a href="#L38">38</a></th><td>                right = width;</td></tr><tr><th id="L39"><a href="#L39">39</a></th><td>                right_y0 = y;</td></tr><tr><th id="L40"><a href="#L40">40</a></th><td>                right_y1 = y + height;</td></tr><tr><th id="L41"><a href="#L41">41</a></th><td>            }</td></tr><tr><th id="L42"><a href="#L42">42</a></th><td>        }</td></tr><tr><th id="L43"><a href="#L43">43</a></th><td></td></tr><tr><th id="L44"><a href="#L44">44</a></th><td>        if (height != r.height) {</td></tr><tr><th id="L45"><a href="#L45">45</a></th><td>            if (y &lt; r.height / 2) {</td></tr><tr><th id="L46"><a href="#L46">46</a></th><td>                top = height;</td></tr><tr><th id="L47"><a href="#L47">47</a></th><td>                top_x0 = x;</td></tr><tr><th id="L48"><a href="#L48">48</a></th><td>                top_x1 = x + width;</td></tr><tr><th id="L49"><a href="#L49">49</a></th><td>            } else {</td></tr><tr><th id="L50"><a href="#L50">50</a></th><td>                bottom = height;</td></tr><tr><th id="L51"><a href="#L51">51</a></th><td>                bottom_x0 = x;</td></tr><tr><th id="L52"><a href="#L52">52</a></th><td>                bottom_x1 = x + width;</td></tr><tr><th id="L53"><a href="#L53">53</a></th><td>            }</td></tr><tr><th id="L54"><a href="#L54">54</a></th><td>        }</td></tr><tr><th id="L55"><a href="#L55">55</a></th><td></td></tr><tr><th id="L56"><a href="#L56">56</a></th><td>        struts[0] = left;</td></tr><tr><th id="L57"><a href="#L57">57</a></th><td>        struts[1] = right;</td></tr><tr><th id="L58"><a href="#L58">58</a></th><td>        struts[2] = top;</td></tr><tr><th id="L59"><a href="#L59">59</a></th><td>        struts[3] = bottom;</td></tr><tr><th id="L60"><a href="#L60">60</a></th><td>        struts[4] = left_y0;</td></tr><tr><th id="L61"><a href="#L61">61</a></th><td>        struts[5] = left_y1;</td></tr><tr><th id="L62"><a href="#L62">62</a></th><td>        struts[6] = right_y0;</td></tr><tr><th id="L63"><a href="#L63">63</a></th><td>        struts[7] = right_y1;</td></tr><tr><th id="L64"><a href="#L64">64</a></th><td>        struts[8] = top_x0;</td></tr><tr><th id="L65"><a href="#L65">65</a></th><td>        struts[9] = top_x1;</td></tr><tr><th id="L66"><a href="#L66">66</a></th><td>        struts[10] = bottom_x0;</td></tr><tr><th id="L67"><a href="#L67">67</a></th><td>        struts[11] = bottom_x1;</td></tr><tr><th id="L68"><a href="#L68">68</a></th><td></td></tr><tr><th id="L69"><a href="#L69">69</a></th><td></td></tr><tr><th id="L70"><a href="#L70">70</a></th><td>        stdout.printf("%d %d %d %d %d %d\n", left, right, top, bottom, y, r.height);</td></tr><tr><th id="L71"><a href="#L71">71</a></th><td>        var display = x11_get_default_xdisplay ();</td></tr><tr><th id="L72"><a href="#L72">72</a></th><td>        var xid = X11Window.get_xid (get_window ());</td></tr><tr><th id="L73"><a href="#L73">73</a></th><td></td></tr><tr><th id="L74"><a href="#L74">74</a></th><td>        display.change_property (xid, display.intern_atom ("_NET_WM_STRUT_PARTIAL", false), X.XA_CARDINAL, 32, X.PropMode.Replace, (uchar[])struts, 12);</td></tr><tr><th id="L75"><a href="#L75">75</a></th><td>        display.change_property (xid, display.intern_atom ("_NET_WM_STRUT", false), X.XA_CARDINAL, 32, X.PropMode.Replace, (uchar[])struts, 4);</td></tr><tr><th id="L76"><a href="#L76">76</a></th><td></td></tr><tr><th id="L77"><a href="#L77">77</a></th><td></td></tr><tr><th id="L78"><a href="#L78">78</a></th><td>    }</td></tr><tr><th id="L79"><a href="#L79">79</a></th><td></td></tr><tr><th id="L80"><a href="#L80">80</a></th><td>    public PanelAbstractWindow () {</td></tr><tr><th id="L81"><a href="#L81">81</a></th><td>        add_events (Gdk.EventMask.BUTTON_PRESS_MASK</td></tr><tr><th id="L82"><a href="#L82">82</a></th><td>            | Gdk.EventMask.BUTTON_RELEASE_MASK</td></tr><tr><th id="L83"><a href="#L83">83</a></th><td>            | Gdk.EventMask.STRUCTURE_MASK</td></tr><tr><th id="L84"><a href="#L84">84</a></th><td>            | Gdk.EventMask.POINTER_MOTION_MASK);</td></tr><tr><th id="L85"><a href="#L85">85</a></th><td></td></tr><tr><th id="L86"><a href="#L86">86</a></th><td>        skip_taskbar_hint = true;</td></tr><tr><th id="L87"><a href="#L87">87</a></th><td>        set_decorated (false);</td></tr><tr><th id="L88"><a href="#L88">88</a></th><td>        set_resizable (false);</td></tr><tr><th id="L89"><a href="#L89">89</a></th><td>        set_focus_on_map (true);</td></tr><tr><th id="L90"><a href="#L90">90</a></th><td>        set_accept_focus (true);</td></tr><tr><th id="L91"><a href="#L91">91</a></th><td>        stick ();</td></tr><tr><th id="L92"><a href="#L92">92</a></th><td>     </td></tr><tr><th id="L93"><a href="#L93">93</a></th><td>        var screen = get_screen();</td></tr><tr><th id="L94"><a href="#L94">94</a></th><td>        screen.monitors_changed.connect (() =&gt; {</td></tr><tr><th id="L95"><a href="#L95">95</a></th><td>            screen_size_changed ();</td></tr><tr><th id="L96"><a href="#L96">96</a></th><td>        });</td></tr><tr><th id="L97"><a href="#L97">97</a></th><td></td></tr><tr><th id="L98"><a href="#L98">98</a></th><td>        screen.size_changed.connect (() =&gt; {</td></tr><tr><th id="L99"><a href="#L99">99</a></th><td>            screen_size_changed ();</td></tr><tr><th id="L100"><a href="#L100">100</a></th><td>        });</td></tr><tr><th id="L101"><a href="#L101">101</a></th><td>    }</td></tr><tr><th id="L102"><a href="#L102">102</a></th><td>}</td></tr></tbody></table>
+
+      </div>
+      <div id="help"><strong>Note:</strong> See <a href="/wiki/TracBrowser">TracBrowser</a>
+        for help on using the repository browser.</div>
+      <div id="anydiff">
+        <form action="/diff" method="get">
+          <div class="buttons">
+            <input type="hidden" name="new_path" value="/rote/blankon-panel/src/panel-abstract-window.vala" />
+            <input type="hidden" name="old_path" value="/rote/blankon-panel/src/panel-abstract-window.vala" />
+            <input type="hidden" name="new_rev" value="rote,blankon-panel,47" />
+            <input type="hidden" name="old_rev" value="rote,blankon-panel,47" />
+            <input type="submit" value="View changes..." title="Select paths and revs for Diff" />
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="last first">
+          <a rel="nofollow" href="/export/rote%2Cblankon-panel%2C47/rote/blankon-panel/src/panel-abstract-window.vala">Original Format</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Fajar baru perangkat lunak legal dan kreatif, untuk, dan oleh anak negeri</p>
+    </div>
+  </body>
+</html>
