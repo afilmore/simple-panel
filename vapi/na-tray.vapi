@@ -7,8 +7,13 @@ namespace Na {
 	
     [CCode (cname="NaTray", cprefix="na_tray_", cheader_filename = "na-tray.h", type_id = "na_tray_get_type ()")]
 	public class Tray : Gtk.Bin {
-		[CCode (cname="na_tray_new_for_screen", has_construct_function = true, type = "GtkBin*")]
-		public Tray (Gdk.Screen screen, Gtk.Orientation orientation, void* cb, void* data);
+		
+		public Gdk.Screen screen {get;set;}
+		public Gtk.Orientation orientation {get;set;}
+        
+        [CCode (cname="na_tray_new_for_screen", has_construct_function = true, type = "GtkBin*")]
+        public Tray (Gdk.Screen screen, Gtk.Orientation orientation, void* cb, void* data);
+        
         //public Type get_type (void);
         public void set_orientation	(Gtk.Orientation orientation);
         public Gtk.Orientation get_orientation ();

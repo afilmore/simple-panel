@@ -1,4 +1,6 @@
-## Process this file with automake to produce Makefile.in
+NULL=
 
-SUBDIRS = src data
+SUBDIRS=data src
 
+EXTRA_DIST = \
+	$(NULL)

@@ -13,9 +13,9 @@
 
 using Gtk;
 
-public class SystemClockApplet : Object, PanelApplet {
+public class SystemClockApplet : Gtk.Label, PanelApplet {
     
-    Gtk.Label _label;
+    //Gtk.Label _label;
     string _timestr;
     
     construct
@@ -28,7 +28,7 @@ public class SystemClockApplet : Object, PanelApplet {
         
         Timeout.add_seconds (seconds, update);
         
-        _label = new Gtk.Label (_timestr);
+        //_label = new Gtk.Label (_timestr);
         
         //this.label = _timestr;
     }
@@ -48,12 +48,12 @@ public class SystemClockApplet : Object, PanelApplet {
         
         Timeout.add_seconds (seconds, this.update);
         
-        _label.label = _timestr;
+        this.label = _timestr;
         
         return false;
     }
 
-    public Gtk.Widget get_widget () {return _label;}
+//~     public Gtk.Widget get_widget () {return this;}
     public string get_config_text () {return "\n";}
     public string get_name () {return "SystemClockApplet";}
     

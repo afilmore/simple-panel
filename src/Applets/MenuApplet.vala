@@ -11,12 +11,10 @@
  * 
  */
 
-using Gtk;
-using Mc;
 
-class MenuApplet : Object, PanelApplet {
+class MenuApplet : Gtk.EventBox, PanelApplet {
     
-    private Gtk.EventBox _evbox;
+    //private Gtk.EventBox _evbox;
     private Gtk.Image _image;
     private Gdk.Pixbuf? _pixbuf;
     private Gdk.Pixbuf? _pixbufhigh;
@@ -35,7 +33,7 @@ class MenuApplet : Object, PanelApplet {
 
     public bool create (string config_file, int panel_id, int applet_id) {
 	
-        _evbox = new Gtk.EventBox ();
+        //_evbox = new Gtk.EventBox ();
         /*
          *  Initialize the menu cache.
          */
@@ -46,7 +44,7 @@ class MenuApplet : Object, PanelApplet {
         // TODO: should be removed in the destructor....
 //~         menu_cache_remove_reload_notify(m->menu_cache, m->reload_notify);
         
-        unowned CacheDir cache_dir = _cache.get_root_dir ();
+        unowned Mc.CacheDir cache_dir = _cache.get_root_dir ();
         if (cache_dir == null)
             return false;
         
@@ -60,21 +58,21 @@ class MenuApplet : Object, PanelApplet {
         
         _image = new Gtk.Image.from_pixbuf (_pixbufhigh);
         //_image = new Gtk.Image.from_file ("/home/hotnuma/Bureau/ubuntu.png");
-        _evbox.add (_image);
+        this.add (_image);
 
-        _evbox.button_release_event.connect ( (event) => {
+        this.button_release_event.connect ( (event) => {
             if (event.button == 1) {
                 _main_menu.popup (null, null, _position_menu, 1, 0);
             }
             return true;
         });
 
-        _evbox.enter_notify_event.connect ( (event) => {
+        this.enter_notify_event.connect ( (event) => {
             _image.set_from_pixbuf (_pixbuf);
             stdout.printf ("enter\n");
             return false;
         });
-        _evbox.leave_notify_event.connect ( (event) => {
+        this.leave_notify_event.connect ( (event) => {
             _image.set_from_pixbuf (_pixbufhigh);
             stdout.printf ("leave\n");
             
@@ -121,7 +119,7 @@ class MenuApplet : Object, PanelApplet {
         return true;
     }
 
-    public Gtk.Widget get_widget () {return _evbox;}
+    //public Gtk.Widget get_widget () {return this;}
     public string get_config_text () {return "\n";}
     public string get_name () {return "MenuApplet";}
     public static GLib.Type register_type () {return typeof (MenuApplet);}
@@ -140,9 +138,9 @@ class MenuApplet : Object, PanelApplet {
         int menu_height;
         
         /* Get widget geometry. */
-        _evbox.get_window ().get_origin (out widget_x, out widget_y);
+        this.get_window ().get_origin (out widget_x, out widget_y);
         Gtk.Allocation rect;
-        _evbox.get_allocation (out rect);
+        this.get_allocation (out rect);
         widget_width = rect.width;
         widget_height = rect.height;
         
@@ -189,18 +187,18 @@ class MenuApplet : Object, PanelApplet {
     /*******************************************************************************************************************
      * Insert application items from the menu cache.
      */
-    private void _insert_items_recursive (CacheDir cache_dir, Gtk.Menu parent_menu) {
+    private void _insert_items_recursive (Mc.CacheDir cache_dir, Gtk.Menu parent_menu) {
 	
         //int count = 0;
 
-        unowned SList<CacheItem?> item_list = cache_dir.get_children ();
+        unowned SList<Mc.CacheItem?> item_list = cache_dir.get_children ();
 
         while (item_list != null) {
             
-            CacheItem cache_item = item_list.data;
+            Mc.CacheItem cache_item = item_list.data;
             Mc.Type item_type = cache_item.get_type();
             
-            if ((item_type == Mc.Type.APP) && ((CacheApp) cache_item).get_is_visible (Mc.Show.IN_LXDE) == false) {
+            if ((item_type == Mc.Type.APP) && ((Mc.CacheApp) cache_item).get_is_visible (Mc.Show.IN_LXDE) == false) {
                 
 //~                 string show_flags = "";
 //~                 if (((CacheApp) cache_item).get_is_visible (Mc.Show.IN_GNOME) == true) {
@@ -235,7 +233,7 @@ class MenuApplet : Object, PanelApplet {
             
             if (item_type == Mc.Type.DIR) {
                 Gtk.Menu sub_menu = new Gtk.Menu ();
-                this._insert_items_recursive ((CacheDir) cache_item, sub_menu);
+                this._insert_items_recursive ((Mc.CacheDir) cache_item, sub_menu);
                 menu_item.set_submenu(sub_menu);
             }
             
@@ -264,7 +262,7 @@ class MenuApplet : Object, PanelApplet {
             menu_item = new Gtk.ImageMenuItem.with_label (cache_item.get_name ());
             
             string icon = cache_item.get_icon ();
-            Gtk.Image image = new Gtk.Image.from_icon_name (icon, IconSize.MENU);            
+            Gtk.Image image = new Gtk.Image.from_icon_name (icon, Gtk.IconSize.MENU);            
             ((Gtk.ImageMenuItem)menu_item).set_image (image);
             
             if (item_type == Mc.Type.APP) {

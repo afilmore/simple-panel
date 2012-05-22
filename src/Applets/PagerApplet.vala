@@ -11,19 +11,18 @@
  * 
  */
 
-using Gtk;
-
-class PagerApplet : Object , PanelApplet {
+class PagerApplet : Wnck.Pager , PanelApplet {
     
-    private Wnck.Pager _pager;
+    //private Wnck.Pager _pager;
     public bool create (string config_file, int panel_id, int applet_id) {
 	    
-        _pager = new Wnck.Pager ();
-        _pager.set_orientation (Gtk.Orientation.HORIZONTAL);
+//~         _pager = new Wnck.Pager ();
+        this.set_orientation (Gtk.Orientation.HORIZONTAL);
         
         return true;
     }
-    public Gtk.Widget get_widget () {return _pager;}
+    //public Gtk.Widget get_widget () {return _pager;}
+    
     public string get_config_text () {return "\n";}
     public string get_name () {return "PagerApplet";}
     public static GLib.Type register_type () {return typeof (PagerApplet);}

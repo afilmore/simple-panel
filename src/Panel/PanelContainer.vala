@@ -129,12 +129,13 @@ public class PanelContainer : Gtk.Grid {
 //~             }
             
 
-            Gtk.Widget _widget = applet.get_widget ();
-            this.add (_widget);
+            //Gtk.Widget _widget = applet.get_widget ();
+            
+            this.add (applet);
             //this.put (applet, pos, 0);
-            _widget.set_size_request (_height, _height);
-            _widget.size_allocate ({0, 0, 50, _height});
-            _widget.get_preferred_width_for_height (_height, out mini, out natural);
+            applet.set_size_request (_height, _height);
+            applet.size_allocate ({0, 0, 50, _height});
+            applet.get_preferred_width_for_height (_height, out mini, out natural);
             //stdout.printf ("preferred %s %d %d\n", applet.get_type ().name (), mini, natural);
             
             pos += inc;

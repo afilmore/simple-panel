@@ -179,9 +179,9 @@ class PanelWindow : Gtk.Window {
         foreach (PanelApplet applet in _container._applet_list) {
             
             Gtk.Allocation a;
-            Gtk.Widget widget = applet.get_widget ();
-            widget.get_allocation (out a);
-            Gtk.Requisition req = widget.get_requisition ();
+            //Gtk.Widget widget = applet.get_widget ();
+            applet.get_allocation (out a);
+            Gtk.Requisition req = applet.get_requisition ();
             
             stdout.printf ("allocation %s %d %d %d %d\n", applet.get_type ().name (), a.x, a.y, a.width, a.height);
             stdout.printf ("requisition %s %d %d %d %d\n", applet.get_type ().name (), 0, 0, req.width, req.height);

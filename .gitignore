@@ -1,3 +1,6 @@
+*.stamp
+*.geany
+
 Makefile.in
 Makefile
 .libs

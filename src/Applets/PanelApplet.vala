@@ -12,11 +12,11 @@
  **********************************************************************************************************************/
 
 
-public interface PanelApplet : Object {
+public interface PanelApplet : Gtk.Widget {
 
     public abstract bool create (string config_file, int panel_id, int applet_id);
     
-    public abstract Gtk.Widget get_widget ();
+    //public abstract Gtk.Widget get_widget ();
     public abstract string get_config_text ();
     public static Type register_type () {return typeof (PanelApplet);}
     

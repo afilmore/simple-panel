@@ -11,27 +11,41 @@
  * 
  */
 
-using Gtk;
-using Na;
 
-class SystemTrayApplet : Object, PanelApplet {
+class SystemTrayApplet : Na.Tray, PanelApplet {
     
-    private Na.Tray _tray;
-    private Gdk.Screen _screen;
+    //private Na.Tray _tray;
+    //private Gdk.Screen _screen;
+    
+    SystemTrayApplet () {
+    
+        Object (screen:Gdk.Screen.get_default (), orientation:Gtk.Orientation.HORIZONTAL);
+        
+        //this._screen = Gdk.Screen.get_default ();
+        
+//~         if (Na.Manager.check_running (src) == true)
+//~             return false;
+    
+    
+    }
     
     public bool create (string config_file, int panel_id, int applet_id) {
         
-        this._screen = Gdk.Screen.get_default ();
+        Gdk.Screen src = Gdk.Screen.get_default ();
         
-        if (Na.Manager.check_running (_screen) == true)
+        //Object (screen:src, orientation:Gtk.Orientation.HORIZONTAL);
+        
+        //this._screen = Gdk.Screen.get_default ();
+        
+        if (Na.Manager.check_running (src) == true)
             return false;
 
-        this._tray = new Tray (_screen, Gtk.Orientation.HORIZONTAL, null, null);
+        //this._tray = new Tray (_screen, Gtk.Orientation.HORIZONTAL, null, null);
         
         return true;
     }
     
-    public Gtk.Widget get_widget () {return _tray;}
+    //public Gtk.Widget get_widget () {return _tray;}
     public string get_config_text () {return "\n";}
     public static GLib.Type register_type () {return typeof (SystemTrayApplet);}
     

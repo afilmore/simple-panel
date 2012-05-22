@@ -11,9 +11,8 @@
  * 
  */
 
-using Gtk;
 
-class LaunchBarApplet : Object, PanelApplet {
+class LaunchBarApplet : Gtk.Grid, PanelApplet {
     
     /*  Configuration file. */
     string _config_file;
