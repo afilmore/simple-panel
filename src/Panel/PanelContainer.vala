@@ -24,12 +24,10 @@
  **********************************************************************************************************************/
 namespace Panel {
     
-    public class Container : Gtk.Grid {
+    public class Container : Gtk.Box {
         
 
         public List<PanelApplet?> _applet_list;
-        
-        private int _height = 26;
         
         private string _config_file;
 
@@ -39,6 +37,9 @@ namespace Panel {
             
             _applet_list = new List<PanelApplet> ();
             _panel_edge = panel_id;
+            
+            this.expand = false;
+
             
         }
         
@@ -52,10 +53,10 @@ namespace Panel {
             } catch (Error e) {
             }
             
+            
             // on a 1440 pixel width screen, it's possible to put 90 icons each 16 pixels width. :-D
             int applet_id;
-            int pos = 0;
-            int inc = 0;
+
             for (applet_id=0; applet_id<100; applet_id++) {
                 
                 string group = "Panel.%d.Applet.%d".printf (_panel_edge, applet_id);
@@ -85,16 +86,7 @@ namespace Panel {
                 if (!applet.create (_config_file, _panel_edge, applet_id))
                     continue;
                 
-                inc = _height;
-                int mini, natural;
-                
-                this.add (applet);
-                
-                applet.set_size_request (_height, _height);
-                applet.size_allocate ({0, 0, 50, _height});
-                applet.get_preferred_width_for_height (_height, out mini, out natural);
-                
-                pos += inc;
+                this.pack_start(applet, false);
                 
                 _applet_list.append (applet);
             }  

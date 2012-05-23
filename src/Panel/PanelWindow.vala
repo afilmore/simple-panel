@@ -102,6 +102,7 @@ namespace Panel {
             _container = new Panel.Container (panel_id);
             this.add (_container);
             _container.load_applets (config_file);
+            this.expand = false;
             
             this.realize ();
             this.show_all ();
