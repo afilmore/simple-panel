@@ -22,6 +22,7 @@ AM_CFLAGS =\
 
 spanel_SOURCES = \
 	Application.vala \
+	Panel/PanelGroup.vala \
 	Panel/PanelWindow.vala \
 	Panel/PanelContainer.vala \
 	Applets/CustomButton.vala \
