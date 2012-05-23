@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  *      
- *      
+ *      Application.vala
  * 
  *      This software is a simple experimental (and shitty) Panel.
  *      The "S" of SPanel can be either simple or shitty.
@@ -84,7 +84,7 @@ namespace Panel {
             
             Object (application_id:app_id, flags:(ApplicationFlags.HANDLES_COMMAND_LINE));
             
-            // NOTE: Members can only be set after alling Object () otherwise it would segfault.
+            // NOTE: Members can only be set after calling Object () otherwise it would segfault.
             _debug_mode = true;
             
         }
@@ -236,15 +236,7 @@ namespace Panel {
             context.add_main_entries (_args_options, null);
 
             try {
-//~                 context.parse (ref args);
-//~                 
-//~                 PanelApplication app = new PanelApplication (_args_debug);
-//~                 GLib.Application unique = new GLib.Application ("org.foo.bar", 0);
-//~                 unique.register ();
-//~                 if ( unique.get_is_remote () == false || _args_debug == true) {
-//~                     app.run ();
-//~                     Gtk.main ();
-//~                 }
+
                 context.parse (ref args);
                 
                 Panel.Application app = new Panel.Application (args);

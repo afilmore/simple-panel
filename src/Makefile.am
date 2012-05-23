@@ -37,7 +37,6 @@ spanel_SOURCES = \
 	Applets/systray/na-tray.c \
 	Applets/systray/na-tray-child.c \
 	Applets/systray/na-tray-manager.c \
-	Utils/misc.c \
 	$(NULL)
 
 spanel_VALAFLAGS = \
@@ -47,7 +46,6 @@ spanel_VALAFLAGS = \
 	--pkg gmodule-2.0 \
 	--pkg libmenu-cache \
 	--pkg libwnck-3.0 \
-	--pkg misc \
 	--pkg na-tray \
 	--pkg x11 \
 	--pkg gdk-x11-3.0 \

@@ -84,14 +84,21 @@ namespace Panel {
                 } catch (Error e) {
                 }
                 
+//~             if (applet.get_type ().name () == "PagerApplet") {
+//~                 stdout.printf ("pager\n");//
+//~             } else {
+//~                 applet.set_size_request (_height, _height);
+//~                 applet.get_preferred_width_for_height (_height, out mini, out natural);
+//~                 stdout.printf ("preferred %s %d %d\n", applet.get_type ().name (), mini, natural);
+//~             }
+            
                 PanelApplet applet = (PanelApplet) Object.new (Type.from_name (type));
                 if (applet.create (_config_file, _panel_edge, applet_id) == false)
                     continue;
                 
-                
-                
                 inc = _height;
                 int mini, natural;
+                
                 //stdout.printf ("%s %d %d\n", applet.get_type ().name (), pos, inc);
                 
     //~             if (applet.get_type ().name () == "PagerApplet") {
