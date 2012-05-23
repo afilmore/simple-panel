@@ -137,8 +137,10 @@ namespace Panel {
              * In debug mode the config file may be loaded from the source tree,
              * so it's not saved in the user config.
              */
-            if (_debug_mode)
-                return;
+             
+             return;
+//~             if (_debug_mode)
+//~                 return;
             
             File file = File.new_for_path (config_file);
 
