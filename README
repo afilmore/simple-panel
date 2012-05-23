@@ -1,7 +1,7 @@
 /*******************************************************************************
  *      
  *      This software is a simple experimental (and shitty) Panel.
- *      The "S" of SPanel can be ever simple or shitty.
+ *      The "S" of SPanel can be either simple or shitty.
  *      That thing is my very first Gtk+ program.
  *      
  *      Copyright 2012 Axel FILMORE <axel.filmore@gmail.com>
