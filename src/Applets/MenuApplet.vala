@@ -1,18 +1,24 @@
 /***********************************************************************************************************************
- * MenuApplet.vala
+ *      
+ *      .vala
  * 
- * Copyright 2012 Axel FILMORE <axel.filmore@gmail.com>
+ *      This software is a simple experimental (and shitty) Panel.
+ *      The "S" of SPanel can be either simple or shitty.
+ *      That thing is my very first Gtk+ program.
+ *      
+ *      Copyright 2012 Axel FILMORE <axel.filmore@gmail.com>
  * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License Version 2.
- * http://www.gnu.org/licenses/gpl-2.0.txt
+ *      This program is free software; you can redistribute it and/or modify
+ *      it under the terms of the GNU General Public License Version 2.
+ *      http://www.gnu.org/licenses/gpl-2.0.txt
  * 
- * Purpose: 
  * 
- */
-
-
-class MenuApplet : Gtk.EventBox, PanelApplet {
+ *      Purpose: 
+ * 
+ * 
+ * 
+ **********************************************************************************************************************/
+public class MenuApplet : Gtk.EventBox, PanelApplet {
     
     //private Gtk.EventBox _evbox;
     private Gtk.Image _image;
@@ -32,7 +38,7 @@ class MenuApplet : Gtk.EventBox, PanelApplet {
     }
 
     public bool create (string config_file, int panel_id, int applet_id) {
-	
+    
         //_evbox = new Gtk.EventBox ();
         /*
          *  Initialize the menu cache.
@@ -121,7 +127,6 @@ class MenuApplet : Gtk.EventBox, PanelApplet {
 
     //public Gtk.Widget get_widget () {return this;}
     public string get_config_text () {return "\n";}
-    public string get_name () {return "MenuApplet";}
     public static GLib.Type register_type () {return typeof (MenuApplet);}
     
     
@@ -188,7 +193,7 @@ class MenuApplet : Gtk.EventBox, PanelApplet {
      * Insert application items from the menu cache.
      */
     private void _insert_items_recursive (Mc.CacheDir cache_dir, Gtk.Menu parent_menu) {
-	
+    
         //int count = 0;
 
         unowned SList<Mc.CacheItem?> item_list = cache_dir.get_children ();
@@ -284,4 +289,6 @@ class MenuApplet : Gtk.EventBox, PanelApplet {
         return menu_item;
     }
 }
+
+
 

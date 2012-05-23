@@ -46,12 +46,8 @@ namespace Panel {
             _applet_list = new List<PanelApplet> ();
             _panel_edge = panel_id;
             
-            //this.set_resize_mode (Gtk.ResizeMode.QUEUE);
-            
             this.set_hexpand (false);
             this.set_hexpand_set (true);
-            
-            //this.set_size_request (1440, _height);
         }
         
         public void load_applets (string config_file) {
@@ -74,24 +70,25 @@ namespace Panel {
                 if (kf.has_group (group) == false)
                     break;
                 
-                /* 
-                 * Get the applet type and  try to create it, that may fail, it's not possible to create
-                 * two system tray for example. Then add the applet to the container and the linked list.
-                 */
+                
+                /*************************************************************************
+                 * Get the applet type and  try to create it, that may fail,
+                 * it's not possible to create two system tray for example.
+                 * Then add the applet to the container and the linked list.
+                 * 
+                 ************************************************************************/
                 string type = "";
                 try {
                     type = kf.get_value (group, "type");
+                    stdout.printf ("applet type: %s\n", type);
                 } catch (Error e) {
                 }
                 
-//~             if (applet.get_type ().name () == "PagerApplet") {
-//~                 stdout.printf ("pager\n");//
-//~             } else {
-//~                 applet.set_size_request (_height, _height);
-//~                 applet.get_preferred_width_for_height (_height, out mini, out natural);
-//~                 stdout.printf ("preferred %s %d %d\n", applet.get_type ().name (), mini, natural);
-//~             }
-            
+                if (type == "SystemTrayApplet" && SystemTrayApplet.check_running ()) {
+                    stdout.printf ("A SystemTray is already running !!!\n");
+                    continue;
+                }
+                
                 PanelApplet applet = (PanelApplet) Object.new (Type.from_name (type));
                 if (applet.create (_config_file, _panel_edge, applet_id) == false)
                     continue;
@@ -99,33 +96,16 @@ namespace Panel {
                 inc = _height;
                 int mini, natural;
                 
-                //stdout.printf ("%s %d %d\n", applet.get_type ().name (), pos, inc);
-                
-    //~             if (applet.get_type ().name () == "PagerApplet") {
-    //~                 stdout.printf ("pager\n");//
-    //~             } else {
-    //~                 applet.set_size_request (_height, _height);
-    //~                 applet.get_preferred_width_for_height (_height, out mini, out natural);
-    //~                 stdout.printf ("preferred %s %d %d\n", applet.get_type ().name (), mini, natural);
-    //~             }
-                
-
-                //Gtk.Widget _widget = applet.get_widget ();
-                
                 this.add (applet);
-                //this.put (applet, pos, 0);
+                
                 applet.set_size_request (_height, _height);
                 applet.size_allocate ({0, 0, 50, _height});
                 applet.get_preferred_width_for_height (_height, out mini, out natural);
-                //stdout.printf ("preferred %s %d %d\n", applet.get_type ().name (), mini, natural);
                 
                 pos += inc;
                 
                 _applet_list.append (applet);
-                
-                
             }  
-            
         }
         
         public string get_config_text () {
@@ -151,4 +131,6 @@ namespace Panel {
         }
     }
 }
+
+
 

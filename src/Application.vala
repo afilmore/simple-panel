@@ -74,6 +74,7 @@ namespace Panel {
         private bool        _debug_mode;
         private string      _user_config_file;
         
+        private unowned string[]                _args;
         // An array containing maximum four panel windows...
         private Panel.Window _panelwnd[4];
         
@@ -85,13 +86,25 @@ namespace Panel {
             Object (application_id:app_id, flags:(ApplicationFlags.HANDLES_COMMAND_LINE));
             
             // NOTE: Members can only be set after calling Object () otherwise it would segfault.
-            _debug_mode = true;
+            _args = args;
             
         }
         
         public void run_local () {
             
+            OptionContext context = new OptionContext ("");
+            try {
+                context.add_main_entries (_args_options, null);
+                context.parse (ref _args);
 
+            } catch (OptionError e) {
+            }
+        
+
+            _debug_mode = _args_debug;
+            
+            Gtk.init (ref _args);
+            
             MenuApplet.register_type ();
             LaunchBarApplet.register_type ();
             PagerApplet.register_type ();
@@ -230,21 +243,9 @@ namespace Panel {
          ********************************************************************************/
          private static int main (string[] args) {
             
-            Gtk.init (ref args);
-            
-            OptionContext context = new OptionContext ("");
-            context.add_main_entries (_args_options, null);
-
-            try {
-
-                context.parse (ref args);
+            Panel.Application app = new Panel.Application (args);
+            app.run_local ();
                 
-                Panel.Application app = new Panel.Application (args);
-                app.run_local ();
-                
-            } catch (OptionError e) {
-            }
-        
             return 0;
         }
     }

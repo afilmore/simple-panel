@@ -1,25 +1,30 @@
-/*
- * LaunchBarApplet.vala
+/***********************************************************************************************************************
+ *      
+ *      .vala
  * 
- * Copyright 2012 Axel FILMORE <axel.filmore@gmail.com>
+ *      This software is a simple experimental (and shitty) Panel.
+ *      The "S" of SPanel can be either simple or shitty.
+ *      That thing is my very first Gtk+ program.
+ *      
+ *      Copyright 2012 Axel FILMORE <axel.filmore@gmail.com>
  * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License Version 2.
- * http://www.gnu.org/licenses/gpl-2.0.txt
+ *      This program is free software; you can redistribute it and/or modify
+ *      it under the terms of the GNU General Public License Version 2.
+ *      http://www.gnu.org/licenses/gpl-2.0.txt
  * 
- * Purpose: 
  * 
- */
-
-
-class LaunchBarApplet : Gtk.Grid, PanelApplet {
+ *      Purpose: 
+ * 
+ * 
+ * 
+ **********************************************************************************************************************/
+public class LaunchBarApplet : Gtk.Grid, PanelApplet {
     
     /*  Configuration file. */
     string _config_file;
     int _panel_id;
     int _applet_id;
     
-    private Gtk.Grid _grid;
     
     /*  Wnck Screen.    */
     private Wnck.Screen _wnckscreen;
@@ -33,8 +38,6 @@ class LaunchBarApplet : Gtk.Grid, PanelApplet {
     
     
     public bool create (string config_file, int panel_id, int applet_id) {
-	    
-        _grid = new Gtk.Grid ();
         
         _config_file = config_file;
         _panel_id = panel_id;
@@ -46,7 +49,7 @@ class LaunchBarApplet : Gtk.Grid, PanelApplet {
         /*
          * Load the configuration file.
          */
-        _grid.set_orientation (Gtk.Orientation.HORIZONTAL);
+        this.set_orientation (Gtk.Orientation.HORIZONTAL);
         
         KeyFile kf = new KeyFile ();
         try {
@@ -86,7 +89,7 @@ class LaunchBarApplet : Gtk.Grid, PanelApplet {
             if (val == "TOGGLE_DESKTOP") {
                 
                 Gtk.Widget? btn = this._create_widget ("TOGGLE_DESKTOP", "desktop", _height);
-                _grid.add (btn);
+                this.add (btn);
                 
             } else if (FileUtils.test (val, FileTest.EXISTS)) {
                 this._create_from_desktop (val);
@@ -179,7 +182,7 @@ class LaunchBarApplet : Gtk.Grid, PanelApplet {
         if (btn == null)
             return false;
         
-        _grid.add (btn);
+        this.add (btn);
         
         return true;
     }
@@ -198,7 +201,7 @@ class LaunchBarApplet : Gtk.Grid, PanelApplet {
 //~         DND -
 //~         DIALOG -
         
-        CustomButton evbox = new CustomButton ();
+        Panel.CustomButton evbox = new Panel.CustomButton ();
         evbox.create (icon, size);
         
         evbox.button_release_event.connect ( (event) => {
@@ -227,9 +230,12 @@ class LaunchBarApplet : Gtk.Grid, PanelApplet {
         return "\n";
     }
     
-    public Gtk.Widget get_widget () {return _grid;}
-    public string get_name () {return "LaunchBarApplet";}
     public static GLib.Type register_type () {return typeof (LaunchBarApplet);}
     
-}		
+}
+
+
+
+
+
 

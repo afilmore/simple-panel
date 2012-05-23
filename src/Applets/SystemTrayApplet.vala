@@ -1,55 +1,55 @@
-/*
- * SystemTrayApplet.vala
+/***********************************************************************************************************************
+ *      
+ *      .vala
  * 
- * Copyright 2012 Axel FILMORE <axel.filmore@gmail.com>
+ *      This software is a simple experimental (and shitty) Panel.
+ *      The "S" of SPanel can be either simple or shitty.
+ *      That thing is my very first Gtk+ program.
+ *      
+ *      Copyright 2012 Axel FILMORE <axel.filmore@gmail.com>
  * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License Version 2.
- * http://www.gnu.org/licenses/gpl-2.0.txt
+ *      This program is free software; you can redistribute it and/or modify
+ *      it under the terms of the GNU General Public License Version 2.
+ *      http://www.gnu.org/licenses/gpl-2.0.txt
  * 
- * Purpose: 
  * 
- */
-
-
-class SystemTrayApplet : Na.Tray, PanelApplet {
+ *      Purpose: 
+ * 
+ * 
+ * 
+ **********************************************************************************************************************/
+public class SystemTrayApplet : Gtk.Grid, PanelApplet {
     
-    //private Na.Tray _tray;
-    //private Gdk.Screen _screen;
+    private Na.Tray _na_tray;
     
-    SystemTrayApplet () {
+//~         SystemTrayApplet () {
+//~             
+//~             // class constructor is not called...
+//~         
+//~         }
     
-        Object (screen:Gdk.Screen.get_default (), orientation:Gtk.Orientation.HORIZONTAL);
-        
-        //this._screen = Gdk.Screen.get_default ();
-        
-//~         if (Na.Manager.check_running (src) == true)
-//~             return false;
-    
-    
+    public static bool check_running () {
+        return Na.Manager.check_running (Gdk.Screen.get_default ());
     }
     
     public bool create (string config_file, int panel_id, int applet_id) {
         
-        Gdk.Screen src = Gdk.Screen.get_default ();
+        this.set_orientation (Gtk.Orientation.HORIZONTAL);
+        //stdout.printf ("NA TRAY!!!!!!!!!!!!!!!!!!\n");
+//~             if (!check_running ()) {
         
-        //Object (screen:src, orientation:Gtk.Orientation.HORIZONTAL);
+            this._na_tray = new Na.Tray (Gdk.Screen.get_default (), Gtk.Orientation.HORIZONTAL, null, null);
+            this.add (_na_tray);
         
-        //this._screen = Gdk.Screen.get_default ();
-        
-        if (Na.Manager.check_running (src) == true)
-            return false;
-
-        //this._tray = new Tray (_screen, Gtk.Orientation.HORIZONTAL, null, null);
+//~             }
         
         return true;
     }
     
-    //public Gtk.Widget get_widget () {return _tray;}
     public string get_config_text () {return "\n";}
     public static GLib.Type register_type () {return typeof (SystemTrayApplet);}
     
-    public string get_name () {return "SystemTrayApplet";}
-
 }
+
+
 
