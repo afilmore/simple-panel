@@ -61,13 +61,9 @@ namespace Panel {
             
             
             // Try to read the user configuration file or try the wide system one...
-            if (this.load_config (_user_config_file) == false) {
+            if (!this.load_config (_user_config_file)) {
                 
-                string system_config_file;
-                if (_debug_mode)
-                    system_config_file = PACKAGE_DATA_DIR + "/simple-panel/" + "debug.conf";
-                else
-                    system_config_file = PACKAGE_DATA_DIR + "/simple-panel/" + CONFIG_FILE;
+                string system_config_file = PACKAGE_DATA_DIR + "/simple-panel/" + CONFIG_FILE;
                 
                 if (this.load_config (system_config_file) == false) {
                     

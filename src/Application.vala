@@ -47,7 +47,7 @@ namespace Panel {
      * Command line options.
      * 
      * 
-     ****************************************************************************************/
+     ************************************************************************************/
     bool        _args_debug = false;
     bool        _args_show_version = false;
     string[]    _args_remaining;
@@ -64,11 +64,11 @@ namespace Panel {
      * 
      * 
      * 
-     ****************************************************************************************/
+     ************************************************************************************/
     public class Application : GLib.Application {
         
         
-        private unowned string[]                _args;
+        private unowned string[] _args;
         
         
         public Application (string[] args) {
@@ -95,13 +95,12 @@ namespace Panel {
 
             Gtk.init (ref _args);
             
-            Panel.Group panel_group = new Panel.Group (_args_debug);
-            
+            Panel.Group panel_group;
+            panel_group = new Panel.Group (_args_debug);
             
             Gtk.main ();
 
         }
-        
         
         
         /*********************************************************************************

@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  *      
- *      .vala
+ *      SystemTrayApplet.vala
  * 
  *      This software is a simple experimental (and shitty) Panel.
  *      The "S" of SPanel can be either simple or shitty.
@@ -22,11 +22,6 @@ public class SystemTrayApplet : Gtk.Grid, PanelApplet {
     
     private Na.Tray _na_tray;
     
-//~         SystemTrayApplet () {
-//~             
-//~             // class constructor is not called...
-//~         
-//~         }
     
     public static bool check_running () {
         return Na.Manager.check_running (Gdk.Screen.get_default ());
@@ -35,13 +30,13 @@ public class SystemTrayApplet : Gtk.Grid, PanelApplet {
     public bool create (string config_file, int panel_id, int applet_id) {
         
         this.set_orientation (Gtk.Orientation.HORIZONTAL);
-        //stdout.printf ("NA TRAY!!!!!!!!!!!!!!!!!!\n");
-//~             if (!check_running ()) {
+
+            if (!check_running ()) {
         
             this._na_tray = new Na.Tray (Gdk.Screen.get_default (), Gtk.Orientation.HORIZONTAL, null, null);
             this.add (_na_tray);
         
-//~             }
+            }
         
         return true;
     }

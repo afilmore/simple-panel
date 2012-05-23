@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  *      
- *      .vala
+ *      PagerApplet.vala
  * 
  *      This software is a simple experimental (and shitty) Panel.
  *      The "S" of SPanel can be either simple or shitty.
@@ -18,7 +18,9 @@
  * 
  * 
  **********************************************************************************************************************/
-class PagerApplet : Wnck.Pager , PanelApplet {
+public class PagerApplet : Wnck.Pager , PanelApplet {
+    
+    public static GLib.Type register_type () {return typeof (PagerApplet);}
     
     public bool create (string config_file, int panel_id, int applet_id) {
         
@@ -28,7 +30,6 @@ class PagerApplet : Wnck.Pager , PanelApplet {
     }
     
     public string get_config_text () {return "\n";}
-    public static GLib.Type register_type () {return typeof (PagerApplet);}
     
 }
 

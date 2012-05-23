@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  *      
- *      .vala
+ *      LaunchBarApplet.vala
  * 
  *      This software is a simple experimental (and shitty) Panel.
  *      The "S" of SPanel can be either simple or shitty.

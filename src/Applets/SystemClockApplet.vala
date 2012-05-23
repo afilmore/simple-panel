@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  *      
- *      .vala
+ *      SystemClockApplet.vala
  * 
  *      This software is a simple experimental (and shitty) Panel.
  *      The "S" of SPanel can be either simple or shitty.
@@ -20,34 +20,25 @@
  **********************************************************************************************************************/
 public class SystemClockApplet : Gtk.Label, PanelApplet {
     
-    string _timestr;
+    private string _timestr;
     
-    construct
-    {
-        
-        
-    }
-    
+    public static GLib.Type register_type () {return typeof (SystemClockApplet);}
+
     public bool create (string config_file, int panel_id, int applet_id) {
         
-        DateTime time = new DateTime.now_local ();
-        _timestr = time.format ("%H:%M");
-        
-        int seconds = 60 - time.get_second ();
-        
-        Timeout.add_seconds (seconds, update);
+        this._update ();
         
         return true;
     }
     
-    public bool update () {
+    private bool _update () {
         
         DateTime time = new DateTime.now_local ();
         _timestr = time.format ("%H:%M");
         
         int seconds = 60 - time.get_second ();
         
-        Timeout.add_seconds (seconds, this.update);
+        Timeout.add_seconds (seconds, this._update);
         
         this.label = _timestr;
         
@@ -55,8 +46,6 @@ public class SystemClockApplet : Gtk.Label, PanelApplet {
     }
 
     public string get_config_text () {return "\n";}
-    
-    public static GLib.Type register_type () {return typeof (SystemClockApplet);}
 
 }
 

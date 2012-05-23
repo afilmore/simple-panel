@@ -26,12 +26,6 @@ namespace Panel {
     
     public class Container : Gtk.Grid {
         
-        public enum Column {
-            NAME,
-            EXPAND,
-            DATA,
-            N_COLUMNS
-        }
 
         public List<PanelApplet?> _applet_list;
         
@@ -46,8 +40,6 @@ namespace Panel {
             _applet_list = new List<PanelApplet> ();
             _panel_edge = panel_id;
             
-            this.set_hexpand (false);
-            this.set_hexpand_set (true);
         }
         
         public void load_applets (string config_file) {
@@ -90,7 +82,7 @@ namespace Panel {
                 }
                 
                 PanelApplet applet = (PanelApplet) Object.new (Type.from_name (type));
-                if (applet.create (_config_file, _panel_edge, applet_id) == false)
+                if (!applet.create (_config_file, _panel_edge, applet_id))
                     continue;
                 
                 inc = _height;

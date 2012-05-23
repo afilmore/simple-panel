@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  *      
- *      .vala
+ *      CustomButton.vala
  * 
  *      This software is a simple experimental (and shitty) Panel.
  *      The "S" of SPanel can be either simple or shitty.
@@ -25,7 +25,6 @@ namespace Panel {
         private Gtk.Image _image;
         private Gdk.Pixbuf? _pixbuf;
         private Gdk.Pixbuf? _pixbufhigh;
-        private int _size;
         
         public bool create (string icon, int size) {
         

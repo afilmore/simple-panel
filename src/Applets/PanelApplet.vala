@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  *      
- *      AppletWidget.vala
+ *      PanelApplet.vala
  * 
  *      This software is a simple experimental (and shitty) Panel.
  *      The "S" of SPanel can be either simple or shitty.
@@ -20,10 +20,11 @@
  **********************************************************************************************************************/
 public interface PanelApplet : Gtk.Widget {
 
+    public static Type register_type () {return typeof (PanelApplet);}
+    
     public abstract bool create (string config_file, int panel_id, int applet_id);
     
     public abstract string get_config_text ();
-    public static Type register_type () {return typeof (PanelApplet);}
     
 }
 

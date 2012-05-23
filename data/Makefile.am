@@ -2,7 +2,6 @@ NULL=
 
 default_config_DATA = \
 	simple-panel.conf \
-	debug.conf \
 	$(NULL)
 default_configdir = $(datadir)/simple-panel
 

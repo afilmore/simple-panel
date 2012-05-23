@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  *      
- *      .vala
+ *      TaskListApplet.vala
  * 
  *      This software is a simple experimental (and shitty) Panel.
  *      The "S" of SPanel can be either simple or shitty.
@@ -18,16 +18,21 @@
  * 
  * 
  **********************************************************************************************************************/
-class TaskListApplet : Wnck.Tasklist, PanelApplet {
+public class TaskListApplet : Wnck.Tasklist, PanelApplet {
+    
+    
+    public static GLib.Type register_type () {return typeof (TaskListApplet);}
+    
     
     public bool create (string config_file, int panel_id, int applet_id) {
+        
         this.set_grouping (Wnck.TasklistGroupingType.ALWAYS_GROUP);
+        
         return true;
     }
     
     
     public string get_config_text () {return "\n";}
-    public static GLib.Type register_type () {return typeof (TaskListApplet);}
 
 }
 
