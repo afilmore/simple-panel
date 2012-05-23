@@ -49,7 +49,9 @@ namespace Panel {
         // Geometry, placement.
         private Gdk.Screen _screen;
         private int _panel_edge = 3; // bottom panel...
+        
         int _height;
+        int _width;
         
         // Child container.
         public Panel.Container _container;
@@ -70,23 +72,29 @@ namespace Panel {
             
             // Get screen geometry.
             _screen = Gdk.Screen.get_default ();
-            int screen_height = _screen.get_height ();
+
             int screen_width = _screen.get_width ();
             
-            _height = 24;
+            _height = 26;
             
             // Create a toplevel window in normal or debug mode.
             this.add_events (Gdk.EventMask.BUTTON_RELEASE_MASK);
             this.set_name ("PanelToplevel");
             
-            this.skip_pager_hint = true;
-            this.stick ();
-            if (_debug == false) {
+            
+            if (_debug) {
+                this.set_position (Gtk.WindowPosition.CENTER);
+            } else {
+                
+                this.stick ();
+                this.skip_pager_hint = true;
+                _width = screen.get_width ();
                 this.skip_taskbar_hint = true;
                 this.type_hint = Gdk.WindowTypeHint.DOCK;
                 this.decorated = false;
                 this.resizable = false;
-                this.set_default_size (_height, screen_width * 80 /100);
+                
+                //this.set_default_size (_height, screen_width * 80 /100);
             }
             
             
@@ -126,6 +134,27 @@ namespace Panel {
         }
         
         
+        protected override void get_preferred_height(out int min, out int natural) {
+            
+            min = natural = _height;
+        }
+        
+        protected override void get_preferred_width(out int min, out int natural) {
+                
+            if (_debug)
+                min = natural = (get_screen ().get_width () / 4) * 2;
+            else
+                min = natural = get_screen ().get_width ();
+        }
+        
+        protected override void size_allocate (Gtk.Allocation allocation) {
+            
+            base.size_allocate (allocation);
+            
+            //update_geometry();
+            
+        }
+
         private void _create_popup () {
         
             _popup_menu = new Gtk.Menu ();
@@ -169,9 +198,11 @@ namespace Panel {
             if (!this.get_realized())
                 return;
 
+
             /*******************************************************************
              * Since uchar is 8 bits in vala but the struts are 32 bits
              * We have to allocate 4 times as much and do bit-masking...
+             * 
              * 
              ******************************************************************/
             var struts = new ulong [Struts.N_VALUES];
@@ -188,10 +219,21 @@ namespace Panel {
             unowned X.Display display = Gdk.x11_get_default_xdisplay ();
             var xid = Gdk.X11Window.get_xid(this.get_window());
 
-            display.change_property (xid, display.intern_atom ("_NET_WM_STRUT_PARTIAL", false), X.XA_CARDINAL,
-                                  32, X.PropMode.Replace, (uchar[]) struts, struts.length);
-            display.change_property (xid, display.intern_atom ("_NET_WM_STRUT", false), X.XA_CARDINAL,
-                                  32, X.PropMode.Replace, (uchar[]) first_struts, first_struts.length);
+            display.change_property (xid,
+                                     display.intern_atom ("_NET_WM_STRUT_PARTIAL", false),
+                                     X.XA_CARDINAL,
+                                     32,
+                                     X.PropMode.Replace,
+                                     (uchar[]) struts,
+                                     struts.length);
+            
+            display.change_property (xid,
+                                     display.intern_atom ("_NET_WM_STRUT", false),
+                                     X.XA_CARDINAL,
+                                     32,
+                                     X.PropMode.Replace,
+                                     (uchar[]) first_struts,
+                                     first_struts.length);
         }
     }
 }

@@ -86,6 +86,7 @@ namespace Panel {
             } catch (Error e) {
             }
         }
+        
         public bool load_config (string config_file) {
             
             // Check if the specified configuration file exists...
@@ -135,8 +136,6 @@ namespace Panel {
              */
              
              return;
-//~             if (_debug_mode)
-//~                 return;
             
             File file = File.new_for_path (config_file);
 
