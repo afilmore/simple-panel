@@ -1,16 +1,18 @@
+NULL=
 
 default_config_DATA = \
-	default/simple-panel.conf \
-	default/debug.conf
+	simple-panel.conf \
+	debug.conf \
+	$(NULL)
+default_configdir = $(datadir)/simple-panel
 
-default_configdir = $(datadir)/simple-panel/default
-
-ui_DATA = \
-	ui/panel-pref.ui
-
-uidir = $(datadir)/simple-panel/ui
+menu_image_DATA = \
+	menu.png \
+	$(NULL)
+menu_imagedir = $(datadir)/simple-panel
 
 EXTRA_DIST = \
 	$(default_config_DATA) \
-	$(ui)
+	$(menu_image) \
+	$(NULL)
 

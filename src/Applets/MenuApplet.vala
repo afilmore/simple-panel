@@ -57,10 +57,18 @@ public class MenuApplet : Gtk.EventBox, PanelApplet {
         _main_menu = new Gtk.Menu ();
         
         /*  Create the menu button. */
+        
+        
+        
         // FIXME: set the default image path....
-        _pixbuf = new Gdk.Pixbuf.from_file("/home/hotnuma/Bureau/ubuntu.png");
-        _pixbufhigh = new Gdk.Pixbuf.from_file("/home/hotnuma/Bureau/ubuntu.png");
+        
+        string image_file = Panel.CONFIG_DATA_DIR + "/menu.png";
+        
+        _pixbuf = new Gdk.Pixbuf.from_file(image_file);
+        _pixbufhigh = new Gdk.Pixbuf.from_file(image_file);
         _pixbufhigh.saturate_and_pixelate (_pixbufhigh, (float)0.5, false);
+        
+        
         
         _image = new Gtk.Image.from_pixbuf (_pixbufhigh);
         //_image = new Gtk.Image.from_file ("/home/hotnuma/Bureau/ubuntu.png");

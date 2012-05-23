@@ -21,6 +21,10 @@
 namespace Panel {
 
     
+    public const string PACKAGE_DATA_DIR = "/usr/share";
+    public const string CONFIG_DATA_DIR = "/usr/share/simple-panel";
+    public const string CONFIG_FILE = "simple-panel.conf";
+
     // TODO_axl: Try to derivate a window group instead...
     public class Group {
         
@@ -47,22 +51,23 @@ namespace Panel {
             
 
             // Set the user config file to use...
-            string user_config_dir = "%s/%s/%s".printf (Environment.get_user_config_dir(), "simple-panel", "default");
             
-            string config_file;
+            string user_config_dir = Environment.get_user_config_dir() + "/simple-panel/";
+            
             if (_debug_mode)
-                config_file = "debug.conf";
+                _user_config_file = user_config_dir + "debug.conf";
             else
-                config_file = CONFIG_FILE;
-            
-            _user_config_file = "%s/%s".printf (user_config_dir, config_file);
+                _user_config_file = user_config_dir + CONFIG_FILE;
             
             
             // Try to read the user configuration file or try the wide system one...
             if (this.load_config (_user_config_file) == false) {
                 
-                string system_config_dir = "%s/%s/%s".printf (PACKAGE_DATA_DIR, "simple-panel", "default");
-                string system_config_file = "%s/%s".printf (system_config_dir, config_file);
+                string system_config_file;
+                if (_debug_mode)
+                    system_config_file = PACKAGE_DATA_DIR + "/simple-panel/" + "debug.conf";
+                else
+                    system_config_file = PACKAGE_DATA_DIR + "/simple-panel/" + CONFIG_FILE;
                 
                 if (this.load_config (system_config_file) == false) {
                     

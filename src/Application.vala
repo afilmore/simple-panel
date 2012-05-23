@@ -34,9 +34,6 @@ namespace Panel {
      * 
      * 
      ************************************************************************************/
-    public const string PACKAGE_DATA_DIR = "/usr/share";
-    public const string CONFIG_FILE = "simple-panel.conf";
-
     public enum Edge {
         LEFT,
         RIGHT,
