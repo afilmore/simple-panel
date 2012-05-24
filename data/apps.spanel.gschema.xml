@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- compile with "sudo glib-compile-schemas /usr/share/glib-2.0/schemas" -->
+
+<schemalist gettext-domain="gsettings-desktop-schemas">
+  
+    <schema path="/apps/spanel/" id="apps.spanel">
+
+        <key type="s" name="panel0">
+            <default>'/usr/share/lubuntu/wallpapers/lubuntu-default-wallpaper.png'</default>
+            <summary>Summary</summary>
+            <description>Description</description>
+        </key>
+
+
+    </schema>
+
+</schemalist>
+
+
