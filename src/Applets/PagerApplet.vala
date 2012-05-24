@@ -18,7 +18,7 @@
  * 
  * 
  **********************************************************************************************************************/
-public class PagerApplet : Wnck.Pager , PanelApplet {
+public class PagerApplet : Wnck.Pager, PanelApplet {
     
     public static GLib.Type register_type () {return typeof (PagerApplet);}
     

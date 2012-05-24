@@ -26,11 +26,15 @@ spanel_SOURCES = \
 	Panel/PanelWindow.vala \
 	Panel/PanelContainer.vala \
 	Applets/CustomButton.vala \
+	Applets/CustomButton2.vala \
 	Applets/PanelApplet.vala \
 	Applets/MenuApplet.vala \
 	Applets/LaunchBarApplet.vala \
 	Applets/PagerApplet.vala \
 	Applets/TaskListApplet.vala \
+	Applets/TaskList/TaskButton.vala \
+	Applets/TaskList/TaskAppButton.vala \
+	Applets/TaskList/TaskListApplet2.vala \
 	Applets/SystemTrayApplet.vala \
 	Applets/SystemClockApplet.vala \
 	Applets/systray/fixedtip.c \

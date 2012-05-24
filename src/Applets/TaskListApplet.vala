@@ -18,15 +18,57 @@
  * 
  * 
  **********************************************************************************************************************/
-public class TaskListApplet : Wnck.Tasklist, PanelApplet {
+//~ public class TaskListApplet : Wnck.Tasklist, PanelApplet {
+//~     
+//~     
+//~     public static GLib.Type register_type () {return typeof (TaskListApplet);}
+//~     
+//~     
+//~     public bool create (string config_file, int panel_id, int applet_id) {
+//~         
+//~         this.set_grouping (Wnck.TasklistGroupingType.ALWAYS_GROUP);
+//~         
+//~         
+//~         
+//~         return true;
+//~     }
+//~     
+//~     
+//~     public string get_config_text () {return "\n";}
+//~ 
+//~ }
+//~ 
+public class TaskListApplet : Gtk.Box, PanelApplet {
     
+    private Wnck.Tasklist _task_list;
+    
+    construct {
+        orientation = Gtk.Orientation.HORIZONTAL;
+        spacing = 0;
+        _task_list = new Wnck.Tasklist ();
+        this.pack_start (_task_list);
+        stdout.printf ("construct\n");
+    }
+    
+    public TaskListApplet () {
+        
+        stdout.printf ("toto\n");
+        
+        Object (orientation: Gtk.Orientation.HORIZONTAL, spacing: 0);
+        
+        _task_list = new Wnck.Tasklist ();
+        this.pack_start (_task_list);
+        
+    }
     
     public static GLib.Type register_type () {return typeof (TaskListApplet);}
     
     
     public bool create (string config_file, int panel_id, int applet_id) {
         
-        this.set_grouping (Wnck.TasklistGroupingType.ALWAYS_GROUP);
+        _task_list.set_grouping (Wnck.TasklistGroupingType.ALWAYS_GROUP);
+        
+        
         
         return true;
     }

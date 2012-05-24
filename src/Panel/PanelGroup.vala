@@ -46,6 +46,7 @@ namespace Panel {
             LaunchBarApplet.register_type ();
             PagerApplet.register_type ();
             TaskListApplet.register_type ();
+            TaskListApplet2.register_type ();
             SystemTrayApplet.register_type ();
             SystemClockApplet.register_type ();
             

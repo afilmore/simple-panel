@@ -125,7 +125,7 @@ namespace Panel {
             
             
             /*** Get the allocated height. ***/
-            _height = this.get_allocated_height ();
+            //_height = this.get_allocated_height ();
             
             if (_debug == false) {
                 this.set_size_request (screen_width, _height);
@@ -137,11 +137,14 @@ namespace Panel {
         
         protected override void get_preferred_height(out int min, out int natural) {
             
+            DateTime time = new DateTime.now_local ();
+            stdout.printf ("Panel.Window.get_preferred_height: %s\n", time.to_string ());
             min = natural = _height;
         }
         
         protected override void get_preferred_width(out int min, out int natural) {
                 
+            stdout.printf ("Panel.Window.get_preferred_width: %u\n", Gtk.get_current_event_time ());
             if (_debug)
                 min = natural = (get_screen ().get_width () / 4) * 2;
             else
@@ -150,6 +153,7 @@ namespace Panel {
         
         protected override void size_allocate (Gtk.Allocation allocation) {
             
+            stdout.printf ("Panel.Window.size_allocate: %u\n", Gtk.get_current_event_time ());
             base.size_allocate (allocation);
             
             //update_geometry();
