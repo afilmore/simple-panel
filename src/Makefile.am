@@ -22,11 +22,11 @@ spanel_SOURCES = \
 	Panel/PanelGroup.vala \
 	Panel/PanelWindow.vala \
 	Panel/PanelContainer.vala \
-	Widgets/CustomButton.vala \
 	Widgets/CustomButton2.vala \
 	Applets/PanelApplet.vala \
 	Applets/MenuApplet.vala \
-	Applets/LaunchBarApplet.vala \
+	Applets/LaunchBar/LaunchBarApplet.vala \
+	Applets/LaunchBar/LaunchBarItem.vala \
 	Applets/PagerApplet.vala \
 	Applets/TaskListApplet.vala \
 	Applets/TaskList/TaskButton.vala \

@@ -95,7 +95,13 @@ namespace Panel {
 
             Gtk.init (ref _args);
             Fm.Config fm_config = new Fm.Config ();
+            
+            fm_config.show_thumbnail = false;
+            
             Fm.init (fm_config);
+            
+            //stdout.printf ("panel = %s\n", fm_config.panel);
+            //stdout.printf ("show_thumbnail = %s\n", fm_config.show_thumbnail ? "true" : "false");
             
             Panel.Group panel_group;
             panel_group = new Panel.Group (_args_debug);
