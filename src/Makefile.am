@@ -25,8 +25,8 @@ spanel_SOURCES = \
 	Panel/PanelGroup.vala \
 	Panel/PanelWindow.vala \
 	Panel/PanelContainer.vala \
-	Applets/CustomButton.vala \
-	Applets/CustomButton2.vala \
+	Widgets/CustomButton.vala \
+	Widgets/CustomButton2.vala \
 	Applets/PanelApplet.vala \
 	Applets/MenuApplet.vala \
 	Applets/LaunchBarApplet.vala \
