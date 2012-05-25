@@ -97,12 +97,6 @@ namespace Panel {
             
             _wnckscreen.toggle_showing_desktop (!_wnckscreen.get_showing_desktop ());
             
-//~             if (_debug_mode) {
-//~             
-//~                 Posix.sleep (2);
-//~                 stdout.printf ("Debug Mode !!!\n");
-//~                 _wnckscreen.toggle_showing_desktop (!_wnckscreen.get_showing_desktop ());
-//~             }
         }
             
         public bool load_config (string config_file) {

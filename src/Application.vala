@@ -44,23 +44,6 @@ namespace Panel {
 
 
     /*************************************************************************************
-     * Command line options.
-     * 
-     * 
-     ************************************************************************************/
-//~     bool        _args_debug = false;
-//~     bool        _args_show_version = false;
-//~     string[]    _args_remaining;
-
-//~     const OptionEntry[] _args_options = {
-//~         { "debug", 'd', 0, OptionArg.NONE, ref _args_debug, "Debug mode", null },
-//~         { "version", 'v', 0, OptionArg.NONE, ref _args_show_version, "Show the application's version", null },
-//~         { "", '\0', 0, OptionArg.FILENAME_ARRAY, ref _args_remaining, null, "[FILE...]" },
-//~         {null}
-//~     };
-//~ 
-
-    /*************************************************************************************
      * 
      * 
      * 
@@ -91,14 +74,6 @@ namespace Panel {
         
         public bool run_local () {
             
-//~             OptionContext context = new OptionContext ("");
-//~             try {
-//~                 context.add_main_entries (_args_options, null);
-//~                 context.parse (ref _args);
-//~ 
-//~             } catch (OptionError e) {
-//~             }
-        
             try {
             
                 this.register (null);
