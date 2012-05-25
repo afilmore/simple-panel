@@ -30,6 +30,8 @@ namespace Panel {
         
         bool                        _debug_mode = false;
         
+        Wnck.Screen _wnckscreen;
+        
         // An array containing maximum four panel windows...
         private string      _user_config_file;
         private Panel.Window _panelwnd[4];
@@ -40,6 +42,8 @@ namespace Panel {
             
             _debug_mode = debug;
         
+            _wnckscreen = Wnck.Screen.get_default ();
+            
             //_wingroup = new Gtk.WindowGroup ();
             
             MenuApplet.register_type ();
@@ -89,6 +93,18 @@ namespace Panel {
             }
         }
         
+        public void toggle_desktop () {
+            
+            _wnckscreen.toggle_showing_desktop (!_wnckscreen.get_showing_desktop ());
+            
+//~             if (_debug_mode) {
+//~             
+//~                 Posix.sleep (2);
+//~                 stdout.printf ("Debug Mode !!!\n");
+//~                 _wnckscreen.toggle_showing_desktop (!_wnckscreen.get_showing_desktop ());
+//~             }
+        }
+            
         public bool load_config (string config_file) {
             
             // Check if the specified configuration file exists...

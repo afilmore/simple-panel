@@ -10,6 +10,11 @@ menu_image_DATA = \
 	$(NULL)
 menu_imagedir = $(datadir)/spanel
 
+desktopdir=$(datadir)/applications
+desktop_DATA = \
+	toggledesk.desktop \
+	$(NULL)
+
 EXTRA_DIST = \
 	$(default_config_DATA) \
 	$(menu_image) \

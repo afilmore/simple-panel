@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Icon=desktop
+Name=Toggle Desktop
+GenericName=Toggle Desktop
+Comment=Toggle Desktop
+Categories=Utility;Core;GTK;
+Exec=spanel -t
+StartupNotify=false
+Terminal=false
+MimeType=x-directory/normal;inode/directory;

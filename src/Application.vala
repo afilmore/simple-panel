@@ -48,17 +48,17 @@ namespace Panel {
      * 
      * 
      ************************************************************************************/
-    bool        _args_debug = false;
-    bool        _args_show_version = false;
-    string[]    _args_remaining;
+//~     bool        _args_debug = false;
+//~     bool        _args_show_version = false;
+//~     string[]    _args_remaining;
 
-    const OptionEntry[] _args_options = {
-        { "debug", 'd', 0, OptionArg.NONE, ref _args_debug, "Debug mode", null },
-        { "version", 'v', 0, OptionArg.NONE, ref _args_show_version, "Show the application's version", null },
-        { "", '\0', 0, OptionArg.FILENAME_ARRAY, ref _args_remaining, null, "[FILE...]" },
-        {null}
-    };
-
+//~     const OptionEntry[] _args_options = {
+//~         { "debug", 'd', 0, OptionArg.NONE, ref _args_debug, "Debug mode", null },
+//~         { "version", 'v', 0, OptionArg.NONE, ref _args_show_version, "Show the application's version", null },
+//~         { "", '\0', 0, OptionArg.FILENAME_ARRAY, ref _args_remaining, null, "[FILE...]" },
+//~         {null}
+//~     };
+//~ 
 
     /*************************************************************************************
      * 
@@ -68,30 +68,59 @@ namespace Panel {
     public class Application : GLib.Application {
         
         
-        private unowned string[] _args;
-        
+        private unowned string[]    _args;
+        private Panel.OptionParser  _options;
+        private Panel.Group         _panel_group;        
         
         public Application (string[] args) {
             
-            string app_id = "org.noname.spanel-debug";
+            Panel.OptionParser options = new Panel.OptionParser (args);
+            string app_id;
+            
+            if (options.debug)
+                app_id = "org.noname.spanel-debug";
+            else
+                app_id = "org.noname.spanel";
             
             Object (application_id:app_id, flags:(ApplicationFlags.HANDLES_COMMAND_LINE));
             
             // NOTE: Members can only be set after calling Object () otherwise it would segfault.
             _args = args;
-            
+            _options = options;
         }
         
-        public void run_local () {
+        public bool run_local () {
             
-            OptionContext context = new OptionContext ("");
-            try {
-                context.add_main_entries (_args_options, null);
-                context.parse (ref _args);
-
-            } catch (OptionError e) {
-            }
+//~             OptionContext context = new OptionContext ("");
+//~             try {
+//~                 context.add_main_entries (_args_options, null);
+//~                 context.parse (ref _args);
+//~ 
+//~             } catch (OptionError e) {
+//~             }
         
+            try {
+            
+                this.register (null);
+            
+            } catch (Error e) {
+            
+                print ("GApplication Register Error: %s\n", e.message);
+                return true;
+            }
+            
+            
+            if (this.get_is_remote ())
+                return false;
+                
+            this.command_line.connect (this._on_command_line);
+            
+            
+            /*****************************************************************************
+             * Primary Instance...
+             * 
+             * 
+             ****************************************************************************/
 
             Gtk.init (ref _args);
             Fm.Config fm_config = new Fm.Config ();
@@ -103,15 +132,39 @@ namespace Panel {
             //stdout.printf ("panel = %s\n", fm_config.panel);
             //stdout.printf ("show_thumbnail = %s\n", fm_config.show_thumbnail ? "true" : "false");
             
-            Panel.Group panel_group;
-            panel_group = new Panel.Group (_args_debug);
+            
+            _panel_group = new Panel.Group (_options.debug);
             
             Gtk.main ();
             Fm.finalize ();
-
+            
+            return true;
         }
         
         
+        private int _on_command_line (ApplicationCommandLine command_line) {
+            
+            //stdout.printf ("Application: _on_command_line\n");
+            
+            /*** We handle only remote command lines here... ***/
+            if (!command_line.get_is_remote ())
+                return 0;
+            
+            string[] args = command_line.get_arguments ();
+            Panel.OptionParser options = new Panel.OptionParser (args);
+            
+            if (options.toggledesk)
+                this._toggle_desktop ();
+            
+            return 0;
+        }
+        
+        private void _toggle_desktop () {
+            stdout.printf ("toggle desktop\n");
+            _panel_group.toggle_desktop ();
+        }
+
+
         /*********************************************************************************
          * Program's entry point, read the command line arguments, run the application
          * in a single instance, except in debug mode.
@@ -121,7 +174,10 @@ namespace Panel {
          private static int main (string[] args) {
             
             Panel.Application app = new Panel.Application (args);
-            app.run_local ();
+            if (!app.run_local ()) {
+                //stdout.printf ("Application: global_app.run ()\n");
+                return app.run (args);
+            }
                 
             return 0;
         }

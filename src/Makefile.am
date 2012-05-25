@@ -19,6 +19,7 @@ spanel_CFLAGS = \
 
 spanel_SOURCES = \
 	Application.vala \
+	Common/OptionsParser.vala \
 	Panel/PanelGroup.vala \
 	Panel/PanelWindow.vala \
 	Panel/PanelContainer.vala \
