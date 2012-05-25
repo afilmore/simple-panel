@@ -73,7 +73,7 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
         
         //stdout.printf ("%s\n", _location);
         
-        // TODO_axl: test if the path exists....
+        // TODO_axl: test if the path exists.... create the directory if needed...
         
         _folder_model = new Fm.FolderModel (Fm.Folder.get (new Fm.Path.for_str (_location)), false);
             
