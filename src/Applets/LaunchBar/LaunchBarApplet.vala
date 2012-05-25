@@ -78,7 +78,7 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
         _folder_model = new Fm.FolderModel (Fm.Folder.get (new Fm.Path.for_str (_location)), false);
             
         _folder_model.set_icon_size (22);
-        _folder_model.loaded.connect (_on_model_loaded);
+        _folder_model.loaded.connect        (_on_model_loaded);
         
 
         return true;
@@ -111,9 +111,52 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
             this.add (new LaunchBarItem (file_info, pixbuf));
         
         } while (_folder_model.iter_next (ref it) == true);
+        _folder_model.row_inserted.connect  (_on_row_inserted);
+        _folder_model.row_deleted.connect   (_on_row_deleted);
     }
     
 
+    private void _on_row_inserted (Gtk.TreePath path, Gtk.TreeIter it) {
+        
+        Fm.FileInfo file_info;
+        Gdk.Pixbuf pixbuf;
+        
+        _folder_model.get (it, Fm.FileColumn.ICON, out pixbuf, Fm.FileColumn.INFO, out file_info, -1);
+        
+        if (pixbuf == null) {
+            stdout.printf ("Can't get the icon for %s !!!!\n", file_info.get_target ());
+            return;
+        }
+        
+        if (!file_info.is_desktop_entry () || !file_info.is_symlink ())
+            return;
+            
+        stdout.printf ("desktop entry: %s\n", file_info.get_target ());
+        
+        this.add (new LaunchBarItem (file_info, pixbuf));
+    }
+
+    private void _on_row_deleted (Gtk.TreePath tp) {
+        
+        this.foreach (this.check_item);
+            
+        return;    
+    }
+        
+    public void check_item (Gtk.Widget widget) {
+        
+        LaunchBarItem launch_item = widget as LaunchBarItem;
+        
+        unowned Fm.Path path = launch_item.get_fileinfo ().get_path ();
+        
+        File? file = path.to_gfile ();
+        if (file != null && !file.query_exists ()) {
+            
+            this.remove (launch_item);
+        }
+        
+    }
+    
     public string get_config_text () {
         return "\n";
     }

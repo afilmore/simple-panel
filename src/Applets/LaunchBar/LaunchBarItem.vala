@@ -63,6 +63,10 @@ public class LaunchBarItem : Gtk.EventBox {
     }
     
     
+    public Fm.FileInfo get_fileinfo () {
+        return _file_info;
+    }
+    
     /*************************************************************************************
      * Parse the specified .desktop file and get the program's command line...
      * 
