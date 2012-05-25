@@ -1,14 +1,14 @@
 NULL=
 
 default_config_DATA = \
-	simple-panel.conf \
+	spanel.conf \
 	$(NULL)
-default_configdir = $(datadir)/simple-panel
+default_configdir = $(datadir)/spanel
 
 menu_image_DATA = \
 	menu.png \
 	$(NULL)
-menu_imagedir = $(datadir)/simple-panel
+menu_imagedir = $(datadir)/spanel
 
 EXTRA_DIST = \
 	$(default_config_DATA) \

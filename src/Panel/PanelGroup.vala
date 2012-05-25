@@ -60,7 +60,7 @@ namespace Panel {
             else
                 _user_config_file = user_config_dir + CONFIG_FILE;
             
-            stdout.printf ("%s\n", _user_config_file);
+            stdout.printf ("User config file: %s\n", _user_config_file);
             
             // Try to read the user configuration file or try the wide system one...
             if (!this.load_config (_user_config_file)) {
