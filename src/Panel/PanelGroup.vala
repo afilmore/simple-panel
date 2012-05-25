@@ -22,8 +22,8 @@ namespace Panel {
 
     
     public const string PACKAGE_DATA_DIR = "/usr/share";
-    public const string CONFIG_DATA_DIR = "/usr/share/simple-panel";
-    public const string CONFIG_FILE = "simple-panel.conf";
+    public const string CONFIG_DATA_DIR = "/usr/share/spanel";
+    public const string CONFIG_FILE = "spanel.conf";
 
     // TODO_axl: Try to derivate a window group instead...
     public class Group {
@@ -53,18 +53,19 @@ namespace Panel {
 
             // Set the user config file to use...
             
-            string user_config_dir = Environment.get_user_config_dir() + "/simple-panel/";
+            string user_config_dir = Environment.get_user_config_dir() + "/spanel/";
             
             if (_debug_mode)
                 _user_config_file = user_config_dir + "debug.conf";
             else
                 _user_config_file = user_config_dir + CONFIG_FILE;
             
+            stdout.printf ("%s\n", _user_config_file);
             
             // Try to read the user configuration file or try the wide system one...
             if (!this.load_config (_user_config_file)) {
                 
-                string system_config_file = PACKAGE_DATA_DIR + "/simple-panel/" + CONFIG_FILE;
+                string system_config_file = PACKAGE_DATA_DIR + "/spanel/" + CONFIG_FILE;
                 
                 if (this.load_config (system_config_file) == false) {
                     
@@ -91,7 +92,7 @@ namespace Panel {
         public bool load_config (string config_file) {
             
             // Check if the specified configuration file exists...
-            if (FileUtils.test (config_file, FileTest.EXISTS) == false)
+            if (!FileUtils.test (config_file, FileTest.EXISTS))
                 return false;
             
             
@@ -107,14 +108,12 @@ namespace Panel {
              * Parse the configuration file, create a top level panel windows and store these
              * in the panel windows array.
              * 
-             * [Panel.3] is a bottom panel.
-             * 
              * 
              **************************************************************************************/
             int count = 0;
             int panel_id = Panel.Edge.BOTTOM;
             for (panel_id = 0; panel_id < Panel.Edge.MAX_PANEL; panel_id++) {
-                string group = "Panel.%d".printf (panel_id);
+                string group = "panel%d".printf (panel_id);
                 if (kf.has_group (group) == false)
                     continue;
                 

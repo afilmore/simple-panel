@@ -59,7 +59,7 @@ namespace Panel {
 
             for (applet_id=0; applet_id<100; applet_id++) {
                 
-                string group = "Panel.%d.Applet.%d".printf (_panel_edge, applet_id);
+                string group = "panel%d-applet%d".printf (_panel_edge, applet_id);
                 if (kf.has_group (group) == false)
                     break;
                 

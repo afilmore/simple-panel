@@ -21,8 +21,14 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
     
     // Configuration file.
     string              _config_file;
-    int                 _panel_id;
-    int                 _applet_id;
+    
+    string              location;
+    
+    // A Global Model to handle Files/Folder on the desktop...
+    Fm.FolderModel?     global_model = null;    
+    
+//~     int                 _panel_id;
+//~     int                 _applet_id;
     
     // Wnck Screen.
     private Wnck.Screen _wnckscreen;
@@ -35,8 +41,8 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
     public bool create (string config_file, int panel_id, int applet_id) {
         
         _config_file = config_file;
-        _panel_id = panel_id;
-        _applet_id = applet_id;
+//~         _panel_id = panel_id;
+//~         _applet_id = applet_id;
         
         _wnckscreen = Wnck.Screen.get_default ();
         
@@ -57,9 +63,76 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
         
         //string group = "Panel.%d.Applet.%d".printf (panel_id, applet_id);
         
+
+        string applet_group = "panel%d-applet%d".printf (panel_id, applet_id);
+        
+        if (!kf.has_group (applet_group))
+            return false;
+        
+        string key = "location";
+        
+//~         try {
+//~             if (!kf.has_key (applet_id, key))
+//~                 break;
+//~         } catch (Error e) {
+//~         }
+            
+        string val = "";
+        try {
+            val = kf.get_value (applet_group, key);
+        } catch (Error e) {
+        }
+        
+        location = Environment.get_user_config_dir() + "/spanel/" + val;
+        
+        stdout.printf ("%s\n", location);
+
+        Fm.Path? path = new Fm.Path.for_str (location);
+        if (path == null)
+            return false;
+        
+        Fm.Folder? folder = Fm.Folder.get (path);
+        if (folder == null)
+            return false;
+            
+        global_model = new Fm.FolderModel (folder, false);
+        if (global_model == null)
+            return false;
+            
+        global_model.loaded.connect (_on_model_loaded);
+        
+
         return true;
     }
     
+    private void _on_model_loaded () {
+        
+        Gtk.TreeIter    it;
+        Fm.FileInfo? fi;
+        
+        Gdk.Pixbuf      icon;
+        
+        if (!global_model.get_iter_first (out it))
+            return;
+            
+        do {
+            global_model.get (it, Fm.FileColumn.ICON, out icon, Fm.FileColumn.INFO, out fi, -1);
+            
+            stdout.printf ("%s\n", fi.get_target ());
+            
+            
+            //Gtk.Widget? btn = _create_widget (fi.get_target (), "google-chrome", 22);
+            Gtk.Button? btn = new Gtk.Button ();
+        
+//~             if (btn == null)
+//~                 return false;
+            
+            this.add (btn);
+        
+
+        } while (global_model.iter_next (ref it) == true);
+            
+    }
     
     /*************************************************************************************
      * Parse the specified .desktop file.
@@ -146,7 +219,8 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
         
         
         // Create the widget...
-        Gtk.Widget? btn = _create_widget (exec_parts, icon, _height);
+        //Gtk.Widget? btn = _create_widget (exec_parts, icon, _height);
+        Gtk.Button? btn = new Gtk.Button ();
         
         if (btn == null)
             return false;

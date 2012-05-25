@@ -94,11 +94,14 @@ namespace Panel {
         
 
             Gtk.init (ref _args);
+            Fm.Config fm_config = new Fm.Config ();
+            Fm.init (fm_config);
             
             Panel.Group panel_group;
             panel_group = new Panel.Group (_args_debug);
             
             Gtk.main ();
+            Fm.finalize ();
 
         }
         
