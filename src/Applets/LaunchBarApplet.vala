@@ -16,26 +16,21 @@
  *      Purpose: 
  * 
  * 
- * 
  **********************************************************************************************************************/
 public class LaunchBarApplet : Gtk.Grid, PanelApplet {
     
-    /*  Configuration file. */
-    string _config_file;
-    int _panel_id;
-    int _applet_id;
+    // Configuration file.
+    string              _config_file;
+    int                 _panel_id;
+    int                 _applet_id;
     
-    
-    /*  Wnck Screen.    */
+    // Wnck Screen.
     private Wnck.Screen _wnckscreen;
     
-    //bool expand;
-    int _height = 24;
+    int                 _height = 24;
 
-
-    //private Gdk.Pixbuf? _pixbuf;
-    //private Gdk.Pixbuf? _pixbufhigh;
     
+    public static GLib.Type register_type () {return typeof (LaunchBarApplet);}
     
     public bool create (string config_file, int panel_id, int applet_id) {
         
@@ -45,11 +40,14 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
         
         _wnckscreen = Wnck.Screen.get_default ();
         
-        
-        /*
-         * Load the configuration file.
-         */
         this.set_orientation (Gtk.Orientation.HORIZONTAL);
+        
+        
+        /*************************************************************
+         * Load the configuration file...
+         * 
+         * 
+         ************************************************************/
         
         KeyFile kf = new KeyFile ();
         try {
@@ -57,58 +55,25 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
         } catch (Error e) {
         }
         
-        
-        /*
-         * Find "buttonxx=" keys and create launcher widgets.
-         */
-        string group = "Panel.%d.Applet.%d".printf (panel_id, applet_id);
-        
-        if (kf.has_group (group) == false)
-            return false;
-        
-        for (int i = 0; i<100; i++) {
-            
-            string key = "button%d".printf (i);
-            
-            try {
-                if (kf.has_key (group, key) == false)
-                    break;
-            } catch (Error e) {
-            }
-                
-            string val = "";
-            try {
-                val = kf.get_value (group, key);
-            } catch (Error e) {
-            }
-            
-            
-            /*
-             * Parse the .desktop file and create the widget.
-             */
-            if (val == "TOGGLE_DESKTOP") {
-                
-                Gtk.Widget? btn = this._create_widget ("TOGGLE_DESKTOP", "desktop", _height);
-                this.add (btn);
-                
-            } else if (FileUtils.test (val, FileTest.EXISTS)) {
-                this._create_from_desktop (val);
-            }
-            
-        }
+        //string group = "Panel.%d.Applet.%d".printf (panel_id, applet_id);
         
         return true;
     }
     
     
-    /*******************************************************************************************************************
-     * Parse the specified .desktop file, create a button widget and add it to the Gtk.Grid.
-     */
+    /*************************************************************************************
+     * Parse the specified .desktop file.
+     * Create a button widget and add it to the Gtk.Grid...
+     * 
+     ************************************************************************************/
      private bool _create_from_desktop (string val) {
         
-        /*
-         * Get the "Desktop Entry" group.
-         */
+        
+        /*************************************************************
+         * Get the "Desktop Entry" group...
+         * 
+         * 
+         ************************************************************/
         KeyFile kf = new KeyFile ();
         try {
             kf.load_from_file (val, KeyFileFlags.NONE);
@@ -119,9 +84,12 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
         if (kf.has_group (group) == false)
             return false;
             
-        /* 
+        
+        /*************************************************************
          * Parse .desktop keys.
-         */
+         * 
+         * 
+         ************************************************************/
         string key;
         
         string type = "";
@@ -145,7 +113,7 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
         key = "Exec";
         try {
             if (kf.has_key (group, key) == true) {
-                // should get "TryExec" ???
+                // FIXME_axl: get "TryExec"...
                 exec = kf.get_value (group, key);
                 exec_parts = exec.split ("%") [0];
             }
@@ -176,7 +144,8 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
         } catch (Error e) {
         }
         
-        /*  Create the widget.  */
+        
+        // Create the widget...
         Gtk.Widget? btn = _create_widget (exec_parts, icon, _height);
         
         if (btn == null)
@@ -188,19 +157,13 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
     }
     
     
-    /*******************************************************************************************************************
+    /*************************************************************************************
      * Create the laucher button and connect event signals.
-     */
+     * 
+     * 
+     ************************************************************************************/
     private Gtk.Widget? _create_widget (string cmdline, string icon, int size) {
     
-//~         INVALID -
-//~         MENU -
-//~         SMALL_TOOLBAR -
-//~         LARGE_TOOLBAR -
-//~         BUTTON -
-//~         DND -
-//~         DIALOG -
-        
         Panel.CustomButton evbox = new Panel.CustomButton ();
         evbox.create (icon, size);
         
@@ -209,7 +172,7 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
                 try {
                     if (cmdline == "TOGGLE_DESKTOP") {
                         stdout.printf ("toggle\n");
-                        _wnckscreen.toggle_showing_desktop (! _wnckscreen.get_showing_desktop ());
+                        _wnckscreen.toggle_showing_desktop (!_wnckscreen.get_showing_desktop ());
                     } else {
                         Process.spawn_command_line_async(cmdline);
                     }
@@ -220,22 +183,12 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
         });
         
         return evbox;
-        
     }
     
     public string get_config_text () {
         
-        /* TODO : save the launcher items to the config file. */
-        
         return "\n";
     }
-    
-    public static GLib.Type register_type () {return typeof (LaunchBarApplet);}
-    
 }
-
-
-
-
 
 
