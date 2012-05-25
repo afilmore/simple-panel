@@ -6,18 +6,15 @@ AM_CPPFLAGS = \
 	-include config.h \
 	-I$(srcdir)/Applets/systray \
 	-DWNCK_I_KNOW_THIS_IS_UNSTABLE \
-	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
-	-DPACKAGE_UI_DIR=\""$(datadir)/simple-panel/ui"\" \
-	$(SIMPLE_PANEL_CFLAGS) \
-	$(WNCK_CFLAGS) \
-	$(MENU_CACHE_CFLAGS) \
-	$(X11_CFLAGS) \
 	$(NULL)
 
-AM_CFLAGS =\
-	 -Wall \
-	 -g \
+spanel_CFLAGS = \
+	$(FM_CFLAGS) \
+	$(MENU_CACHE_CFLAGS) \
+	$(WNCK_CFLAGS) \
+	-Wall \
+	-g \
 	$(NULL)
 
 spanel_SOURCES = \
@@ -48,6 +45,7 @@ spanel_VALAFLAGS = \
 	--vapidir=$(top_srcdir)/vapi \
 	--pkg config \
 	--pkg $(GTK_PKG) \
+	--pkg libfmcore \
 	--pkg gmodule-2.0 \
 	--pkg libmenu-cache \
 	--pkg libwnck-3.0 \
@@ -67,8 +65,6 @@ spanel_LDADD = \
 	$(MENU_CACHE_LIBS) \
 	$(WNCK_LIBS) \
 	$(NULL)
-
-
 
 CLEANFILES = $(patsubst %.vala,%.c,$(filter %.vala, $(SOURCES))) spanel_vala.stamp
 
