@@ -24,6 +24,7 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
     private string          _config_file;
     
     private string          _location;
+    private string          _index_file;
     
     private Fm.FolderModel  _folder_model;    
     
@@ -70,6 +71,7 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
         }
         
         _location = Environment.get_user_config_dir() + "/spanel/" + val;
+        _index_file = _location + "/items.conf";
         
         //stdout.printf ("%s\n", _location);
         
@@ -111,6 +113,8 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
             this.add (new LaunchBarItem (file_info, pixbuf));
         
         } while (_folder_model.iter_next (ref it) == true);
+        
+        
         _folder_model.row_inserted.connect  (_on_row_inserted);
         _folder_model.row_deleted.connect   (_on_row_deleted);
     }
