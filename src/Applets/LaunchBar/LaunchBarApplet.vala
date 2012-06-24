@@ -80,7 +80,7 @@ public class LaunchBarApplet : Gtk.Grid, PanelApplet {
         _folder_model = new Fm.FolderModel (Fm.Folder.get (new Fm.Path.for_str (_location)), false);
             
         _folder_model.set_icon_size (22);
-        _folder_model.loaded.connect        (_on_model_loaded);
+        _folder_model.loaded.connect (_on_model_loaded);
         
 
         return true;

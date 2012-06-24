@@ -47,6 +47,7 @@ spanel_VALAFLAGS = \
 	--pkg config \
 	--pkg $(GTK_PKG) \
 	--pkg libfmcore \
+	--pkg libfmcore-private \
 	--pkg gmodule-2.0 \
 	--pkg libmenu-cache \
 	--pkg libwnck-3.0 \
