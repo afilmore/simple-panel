@@ -28,6 +28,7 @@
  **********************************************************************************************************************/
 namespace Panel {
     
+    Fm.Config global_config;
     
     /*************************************************************************************
      * Globals.
@@ -98,11 +99,12 @@ namespace Panel {
              ****************************************************************************/
 
             Gtk.init (ref _args);
-            Fm.Config fm_config = new Fm.Config ();
             
-            fm_config.show_thumbnail = false;
+            global_config = new Fm.Config ();
             
-            Fm.init (fm_config);
+            global_config.show_thumbnail = false;
+            
+            Fm.init (global_config);
             
             //stdout.printf ("panel = %s\n", fm_config.panel);
             //stdout.printf ("show_thumbnail = %s\n", fm_config.show_thumbnail ? "true" : "false");
