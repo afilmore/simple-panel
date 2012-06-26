@@ -49,8 +49,8 @@ public class MenuApplet : Gtk.EventBox, PanelApplet {
          ********************************************************************************/
         
         
-//~         _cache = Mc.Cache.lookup_sync ("/etc/xdg/lubuntu/menus/lxde-applications.menu");
-        _cache = Mc.Cache.lookup_sync (Panel.global_config.application_menu);
+        _cache = Mc.Cache.lookup_sync ("/etc/xdg/lubuntu/menus/lxde-applications.menu");
+//~         _cache = Mc.Cache.lookup_sync (Panel.global_config.application_menu);
         
         _cache.add_reload_notify ((GLib.Func) this.on_reload_menu);
         
