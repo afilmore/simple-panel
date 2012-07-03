@@ -43,7 +43,7 @@ PKG_CHECK_MODULES(GTK, [$pkg_modules])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
 
-fm_modules="libfmcore-3.0 >= 0.1.99"
+fm_modules="libfmcore >= 0.2.0"
 PKG_CHECK_MODULES(FM, [$fm_modules])
 AC_SUBST(FM_CFLAGS)
 AC_SUBST(FM_LIBS)
