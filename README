@@ -1,6 +1,7 @@
 /*******************************************************************************
  *      
  *      This software is a simple experimental (and shitty) Panel.
+ *      
  *      The "S" of SPanel can be either simple or shitty.
  *      That thing is my very first Gtk+ program.
  *      
@@ -13,21 +14,9 @@
  * 
  ******************************************************************************/
 
- 1 - Backup Your Personal Data :-D
- 
- 2 - Install Needed Dev Packages (see configure.ac)
- 
- 3 - Install LibFmCore (See LibFmCore's README)
- 
- 4 - You Need A Recent Last Vala Release
- 
- 5 - Build With : make clean;make distclean;./autogen.sh && ./configure --enable-debug=yes --prefix=/usr && make
- 
- 6 - Try It In Debug Mode : "src/spanel -d"
- 
- 7 - Pray That It Will Work And That It Won't Screw Up Your Files :-P
- 
- 8 - Enjoy :)
-
-
+        This program is now hosted on Launchpad :
+        
+        https://code.launchpad.net/valadesktop
+        
+        :-P
 
